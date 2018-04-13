@@ -1,0 +1,43 @@
+{
+  "name": "sistema-emprestimo",
+  "version": "1.0.0",
+  "description": "Sistema de emprestimos do laboratório de automação e robótica da ect.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpsdantas/sistema-emprestimo.git"
+  },
+  "author": "Marcus Paulo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mpsdantas/sistema-emprestimo/issues"
+  },
+  "homepage": "https://github.com/mpsdantas/sistema-emprestimo#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "consign": "^0.1.6",
+    "dotenv": "^5.0.1",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.1.2",
+    "mongoose": "^5.0.14"
+  },
+  "devDependencies": {
+    "cz-ptbr-changelog": "^1.0.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-ptbr-changelog"
+    }
+  }
+}
