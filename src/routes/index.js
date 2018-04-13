@@ -12,4 +12,8 @@ module.exports = application => {
         res.render('admin/stats')
     });
     application.get('/admin/reports', blockRouter.statusAdmin, (req,res) => {res.render('admin/reports')});
+
+    application.get('/perfil/user-perfil', blockRouter.statusUser, (req, res) => {
+        res.render('perfil/user-perfil', {nome:req.session.nome})
+    })
 };
