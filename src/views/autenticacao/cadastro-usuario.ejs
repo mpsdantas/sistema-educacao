@@ -103,7 +103,7 @@
 				let senha = $('#senha').val();
 				let repetirSenha = $('#repetir-senha').val();
 				let arrayErrors = new Array(6);
-
+				/*
 				// CONTROLE DE ERROS FRONT END //
 				if(nome==""){
 					arrayErrors[0] = "O nome é um campo obrigatório.";
@@ -126,18 +126,21 @@
 				// CONTROLE DE ERROS FRONT END //
 				var cont = 0;
 				const arrayExibir = new Array();
+				var status = false;
 				for(erros of arrayErrors){
 					if(erros!==undefined){
 						arrayExibir[cont] = erros;
-						cont++;
 					}else{
 						arrayExibir[cont] = "";
-						cont++;
 					}
+					if(arrayExibir[cont]!==""){
+						status = true;
+					}
+					cont++;
 				}
+				*/
 				// LÓGICA PARA ENTRADA DE DADOS //
-				console.log(arrayErrors);
-				if(arrayExibir.length>0){
+				if(status){
 						let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
