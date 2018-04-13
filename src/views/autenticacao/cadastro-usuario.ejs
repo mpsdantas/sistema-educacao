@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail:</label>
-                            <input type="text" class="form-control" id="email" placeholder="Insira o seu e-mail aqui.">
+                            <input type="email" class="form-control" id="email" placeholder="Insira o seu e-mail aqui.">
                         </div>
 						<div class="form-group">
 							<label for="selectTipoUsuario">Eu sou um:</label>
@@ -95,14 +95,14 @@
 		$(document).ready(function() {
 			$('#form-cadastro').submit(function(event) {
 				event.preventDefault();
-				const nome = $('#nome').val();
-				const email = $('#email').val();
-				const tipoUsuario = $('select[name=tipoUsuario]').val();
-				const tipoDired = $('select[name=tipoDired]').val();
-				const escola = $('#escola').val();
-				const senha = $('#senha').val();
-				const repetirSenha = $('#repetir-senha').val();
-				const arrayErrors = new Array(6);
+				let nome = $('#nome').val();
+				let email = $('#email').val();
+				let tipoUsuario = $('select[name=tipoUsuario]').val();
+				let tipoDired = $('select[name=tipoDired]').val();
+				let escola = $('#escola').val();
+				let senha = $('#senha').val();
+				let repetirSenha = $('#repetir-senha').val();
+				let arrayErrors = new Array(6);
 
 				// CONTROLE DE ERROS FRONT END //
 				if(nome==""){
@@ -124,21 +124,20 @@
 					arrayErrors[5] = "As senhas não são iguais";
 				}
 				// CONTROLE DE ERROS FRONT END //
-
-				// LÓGICA PARA ENTRADA DE DADOS //
-				if(arrayErrors.length>0){
-					var cont = 0;
-					const arrayExibir = new Array();
-					for(erros of arrayErrors){
-						if(erros!==undefined){
-							arrayExibir[cont] = erros;
-							cont++;
-						}else{
-							arrayExibir[cont] = "";
-							cont++;
-						}
+				var cont = 0;
+				const arrayExibir = new Array();
+				for(erros of arrayErrors){
+					if(erros!==undefined){
+						arrayExibir[cont] = erros;
+						cont++;
+					}else{
+						arrayExibir[cont] = "";
+						cont++;
 					}
-					console.log(arrayExibir);
+				}
+				// LÓGICA PARA ENTRADA DE DADOS //
+				console.log(arrayErrors);
+				if(arrayExibir.length>0){
 						let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -168,9 +167,25 @@
 						senha,
 						repetirSenha
 					},
-					success : function(data){ 
-						alert('enviado');
-					}
+					success : function(data, status, xhr){ 
+						if(xhr.status==203){
+							var msg = "";
+							for(let i =0; i<data.erros.length; i++){
+								msg += data.erros[i].msg + '<br>';
+							}
+								let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${msg}
+							</div>`;
+							$('#status').append(htmlAppend);
+						}
+						
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) { 
+						alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+					} 
 				});
 				//REQUISIÇÃO POST SERVIDOR//
 			});
