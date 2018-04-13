@@ -16,7 +16,7 @@
 -->
 <!-- Bootstrap -->
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="css/estilo.css" rel="stylesheet">
+<link href="/css/estilo.css" rel="stylesheet">
 </head>
 <body>
 	<% include ../components/navbar-principal %>
@@ -63,10 +63,9 @@
 	</section>
 	<% include ../components/footer %>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/bootstrap/js/bootstrap.min.js"></script>
 	<script>
@@ -74,8 +73,11 @@
 			$('#form-login').submit(function(event) {
 				event.preventDefault();
 				var html  = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
-				var email = $('#email').val();
-				var senha = $('#senha').val();
+				var usuario = $('#usuario').val();
+				var escola = $('#escola').val();
+				var assunto = $('#assunto').val();
+				var titulo = $('#titulo').val();
+				var descricao = $('#descricao').val();
 				var formData = new FormData();
 				$.ajax({
                     url:'/cadastro',
