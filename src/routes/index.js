@@ -4,8 +4,8 @@ module.exports = application => {
     application.get('/report', blockRouter.statusUser, (req,res) => {
         res.render('report/form',{nome:req.session.nome});
     });
-    application.get('/report/listar', blockRouter.statusUser, (req,res) => {
-        res.render('report/list', {nome:req.session.nome})
+    application.get('/report/visualizar', blockRouter.statusUser, (req,res) => {
+        res.render('report/visualizar',{nome:req.session.nome});
     });
     application.get('/admin', blockRouter.statusAdmin, (req,res) => {res.render('admin/dashboard')});
     application.get('/admin/statistics', blockRouter.statusAdmin,  (req,res) => {

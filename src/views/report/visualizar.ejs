@@ -22,29 +22,42 @@
 	<% include ../components/usuario/navbar-user %>
 	<br>
 	<div class="container">
-		<%if(reports.length>0){%>
-			<%for(let i=0;i<reports.length;i++){%>
 				<div class="row">
 					<div class="col-md-8 offset-md-2">
+						<h4>Detalhes sobre o Report</h4>
+						<br>
 						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title"><%=reports[i].titulo%></h5>
-								<p class="card-text"><%=reports[i].descricao%></p>
-								<a href="/ver-reports/<%=reports[i]._id%>" class="btn btn-primary">Ver detalhes</a>
+							<div class="card-header">
+							    Seu Report Aqui
+							</div>
+							<div class="card-body">	
+								<h5 class="card-title"><b>Título:</b> Professor não me atende.</h5>
+								<p class="card-text"><b>Descrição:</b> Depois de muita procura, meu professor continua me ingnorando. Estou muito chateado! Brabo mesmo.</p>
+							</div>
+						</div>
+						<hr>
+						<h5>Repostas: (1)</h5>
+						<div class="card">
+							<div class="card-body">	
+								<p class="card-text"><b>Resposta:</b> Olá, João. Já identificamos o problema, estamos tomando providências para resolve-lo.</p>
+								<p class="pull-right text-muted small">Enviado em 12 de Fevereiro de 2018.</p>
 							</div>
 						</div>
 						<br>
-					</div>	
+						<hr>
+						<form id="form-login">
+							<div class="form-group">
+								<label for="descricao"><h5>Responder ao Report:</h5></label>
+								<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
+							</div>
+							<button id="botaoLogin" type="submit" class="btn btn-success">Enviar</button>
+							<hr>
+						</form>	
 				</div>
-			<%}%>
-		<%}else{%>
-			<div class="row">
-				<div class="col-md-8 offset-md-2">
-					<p>Não existem reports</p>
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+					</div>
 				</div>
-			</div>
-		<%}%>
-		
 	</div>
 	<% include ../components/footer %>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
