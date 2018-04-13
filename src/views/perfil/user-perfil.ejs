@@ -18,32 +18,65 @@
 <!-- Bootstrap -->
 <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/estilo.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/perfil/perfil.css">
 </head>
 
 <body>
 
    <% include ../components/usuario/navbar-user %>
    <br>
-<!--
-    
-    <div style="background-color:lightblue; float: left; width: 23%; text-align: justify; margin-right:0%; height: 300px; margin-left: 10px">
-        <img src="/img/nav-brand.png" alt="Perfil" height="300" width="300" >  
-    </div> 
-
-    <div style="background-color:lightgray; float: right; width: 75%; text-align: justify; margin-right:0%; height: 300px; margin-right: 10px   ">
-          
-    </div> 
--->
-    <div class="row">
-        <div class="col-sm-3" style="background-color: blue">
-            <img class="img-fluid" src="/img/nav-brand.png" alt="Perfil" width="300" height="300">  
-        </div>
-        <div class="col-sm-9" style="background-color: red">
-            
-        </div>
+    <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <h4>Meu perfil</h4>
+                        <br>
+                        <div class="card">
+                            <div class="card-header">
+                                Dados
+                            </div>
+                            <div class="card-body"> 
+                                <h5 class="card-title"><b>Nome:</b> Gabriel Araújo de Souza</h5>
+                                <p class="card-text"><b>Email:</b> gabriel_feg@hotmail.com</p>
+                                <p class="card-text"><b>Instituição:</b> Escola Estadual Feliz, Natal-RN</p>
+                                <p class="card-text"><b>Função</b> Aluno</p> 
+                            </div>
+                        </div>
+                        
+                </div>
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                    </div>
+                </div>
     </div>
-   
+    <% include ../components/footer %>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#form-login').submit(function(event) {
+                event.preventDefault();
+                var usuario = $('#usuario').val();
+                var escola = $('#escola').val();
+                var assunto = $('#assunto').val();
+                var titulo = $('#titulo').val();
+                var descricao = $('#descricao').val();
+                $.ajax({
+                    url:'/realizar-report',
+                    type:'post',
+                    data : {
+                        email,
+                        senha
+                    },
+                    success : function(data){
+                        alert('enviado');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

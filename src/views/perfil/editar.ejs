@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cadastro - Cadastro de envio de informações Dired</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Configurações do meta para mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#f8f9fa">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#f8f9fa">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+	<!--
+	<link rel="icon" href="imagens/favicon.png">
+-->
+<!-- Bootstrap -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/estilo.css" rel="stylesheet">
+</head>
+<body>
+	<% include ../components/navbar-principal %>
+	<br>
+	<br>
+	<section class="conteudo-principal">
+		<div class="container">
+			<div class="row">
+                <div class="col-md-6 offset-md-3 col-10 offset-1">
+					<div id="status"></div>
+                    <form id="form-cadastro">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" id="nome" placeholder="Insira seu email aqui.">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Insira o seu e-mail aqui.">
+                        </div>
+						<div class="form-group">
+							<label for="selectTipoUsuario">Eu sou um:</label>
+							<select name="tipoUsuario" class="form-control" id="selectTipoUsuario">
+								<option value="Aluno">Aluno(a)</option>
+								<option value="Professor">Professor(a)</option>
+								<option value="pais">Pais de aluno(a)</option>
+							</select>
+						</div>
+						<div class="form-group">
+                            <label for="escola">Escola:</label>
+                            <input type="text" class="form-control" id="escola" placeholder="Insira o nome da sua escola.">
+                        </div>
+						<div class="form-group">
+							<label for="selectTipoDired">Dired que pertence a sua escola:</label>
+							<select name="tipoDired" class="form-control" id="selectTipoDired">
+								<option value="natal">Natal</option>
+								<option value="parnamirin">Parnamirin</option>
+								<option value="Nova Cruz">Nova Cruz</option>
+								<option value="São Paulo do Potengi">São Paulo do Potengi</option>
+								<option value="Ceará Mirim">Ceará Mirim</option>
+								<option value="Macau">Macau</option>
+								<option value="Santa Cruz">Santa Cruz</option>
+								<option value="Angicos">Angicos</option>
+								<option value="Currais Novos">Currais Novos</option>
+								<option value="Caicó">Caicó</option>
+								<option value="Assu">Assu</option>
+								<option value="Mossoró">Mossoró</option>
+								<option value="Apodí">Apodí</option>
+								<option value="Umarizal">Umarizal</option>
+								<option value="Pau dos Ferros">Pau dos Ferros</option>
+								<option value="João Câmara">João Câmara</option>
+							</select>
+						</div>
+						<div class="form-group">
+                            <label for="senha">Senha:</label>
+                            <input type="password" class="form-control" id="senha" placeholder="Insira sua senha aqui.">
+                        </div>
+						<div class="form-group">
+                            <label for="repetir-senha">Repetir senha:</label>
+                            <input type="password" class="form-control" id="repetir-senha" placeholder="Repita sua senha Insira sua senha aqui.">
+                        </div>
+						<button type="submit" class="btn btn-block btn-success">Realizar cadastro</button>
+                    </form>
+					<br><br>
+                </div>
+			</div>
+		</div>
+	</section>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#form-cadastro').submit(function(event) {
+				event.preventDefault();
+				let nome = $('#nome').val();
+				let email = $('#email').val();
+				let tipoUsuario = $('select[name=tipoUsuario]').val();
+				let tipoDired = $('select[name=tipoDired]').val();
+				let escola = $('#escola').val();
+				let senha = $('#senha').val();
+				let repetirSenha = $('#repetir-senha').val();
+				let arrayErrors = new Array(6);
+
+				// CONTROLE DE ERROS FRONT END //
+				if(nome==""){
+					arrayErrors[0] = "O nome é um campo obrigatório.";
+				}
+				if(email==""){
+					arrayErrors[1] = "O E-mail é um campo obrigatório.";
+				}
+				if(escola==""){
+					arrayErrors[2] = "A escola é um campo obrigatório.";
+				}
+				if(senha==""){
+					arrayErrors[3] = "A senha é um campo obrigatório.";
+				}
+				if(repetirSenha==""){
+					arrayErrors[4] = "Por favor repita a senha.";
+				}
+				if(senha!==repetirSenha){
+					arrayErrors[5] = "As senhas não são iguais";
+				}
+				// CONTROLE DE ERROS FRONT END //
+
+				var cont = 0;
+				const arrayExibir = new Array();
+				var status = false;
+				for(erros of arrayErrors){
+					if(erros!==undefined){
+						arrayExibir[cont] = erros;
+					}else{
+						arrayExibir[cont] = "";
+					}
+					if(arrayExibir[cont]!==""){
+						status = true;
+					}
+					cont++;
+				}
+
+				// LÓGICA PARA ENTRADA DE DADOS //
+				if(status){
+						let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						${arrayExibir[0]}<br>
+						${arrayExibir[1]}<br>
+						${arrayExibir[2]}<br>
+						${arrayExibir[3]}<br>
+						${arrayExibir[4]}<br>
+						${arrayExibir[5]}<br>
+					</div>`;
+					$('#status').append(htmlAppend);
+					return;
+				}
+				// LÓGICA PARA ENTRADA DE DADOS //
+
+				//REQUISIÇÃO POST SERVIDOR//
+				$.ajax({
+					url:'/cadastro-usuario',
+					type:'post',
+					data : {
+						nome,
+						email,
+						tipoUsuario,
+						tipoDired,
+						escola,
+						senha,
+						repetirSenha
+					},
+					success : function(data, status, xhr){
+						if(xhr.status==203){
+							var msg = "";
+							for(let i =0; i<data.erros.length; i++){
+								msg += data.erros[i].msg + '<br>';
+							}
+								let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${msg}
+							</div>`;
+							$('#status').append(htmlAppend);
+						}
+						if(data.sucesso){
+							$.ajax({
+                                url:'/login',
+                                type:'post',
+                                data : {
+                                    email,
+									senha
+                                },
+                                success : function(data){
+									if(data.status.tipo=="Servidor"){
+										window.location.href = '/admin';
+									}else{
+										window.location.href = '/report';
+									}
+                                },
+								error: function(XMLHttpRequest, textStatus, errorThrown) {
+									alert("Status: " + textStatus); alert("Error: " + errorThrown);
+								}
+                            });
+						}
+
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						alert("Status: " + textStatus); alert("Error: " + errorThrown);
+					}
+				});
+				//REQUISIÇÃO POST SERVIDOR//
+			});
+		});
+	</script>
+</body>
+</html>
