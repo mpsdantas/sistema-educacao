@@ -194,8 +194,10 @@
 									senha
                                 },
                                 success : function(data){ 
-									if(data.status){
+									if(data.status.tipo=="Servidor"){
 										window.location.href = '/admin';
+									}else{
+										window.location.href = '/report';
 									}
                                 },
 								error: function(XMLHttpRequest, textStatus, errorThrown) { 

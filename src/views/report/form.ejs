@@ -42,7 +42,7 @@
 						<hr>-->
 						<div class="form-group">
 							<label for="selectAssunto">Assunto*</label>
-							<select class="form-control" id="selectAssunto">
+							<select name="assunto" class="form-control" id="selectAssunto">
 								<option value="sugestão">Sugestão de melhoria</option>
 								<option value="reclamação">Reclamação</option>
 								<option value="outros">Outro</option>
@@ -57,7 +57,7 @@
 							<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+							<input class="form-check-input" type="checkbox" value="true" id="checkAnonimo">
 							<label class="form-check-label" for="defaultCheck1">
 								Enviar anonimamente
 							</label>
@@ -86,18 +86,23 @@
 		$(document).ready(function() {
 			$('#form-login').submit(function(event) {
 				event.preventDefault();
-				var usuario = $('#usuario').val();
-				var escola = $('#escola').val();
-				var assunto = $('#assunto').val();
-				var titulo = $('#titulo').val();
-				var descricao = $('#descricao').val();
-				var formData = new FormData();
+				let assunto = $('select[name=assunto]').val();
+				let descricao = $('#descricao').val();
+				let anonimo = $("#checkAnonimo").is( ":checked" )
+				var dados = {
+					assunto,
+					descricao,
+					anonimo
+				}
+				console.log(dados);
+				
 				$.ajax({
                     url:'/realizar-report',
                     type:'post',
                     data : {
-                        email,
-                        senha
+                        assunto,
+						descricao,
+						anonimo
                     },
                     success : function(data){
                         alert('enviado');
