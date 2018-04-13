@@ -7,6 +7,7 @@ const reportSchema = new Schema({
     escola: String,
     titulo: String,
     assunto: String,
+    tipoDired:String,
     descricao: String,
     data: Date,
     statusReport: Boolean,
