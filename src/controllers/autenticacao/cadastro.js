@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Usuario = mongoose.model('Usuarios');
+const Servidor = mongoose.model('Servidores');
 const crypto = require('crypto');
 exports.realizarCadastroUsuario = async (application, req, res) => {
     req.assert('nome', 'O seu nome não pode ser vazio').notEmpty();
@@ -26,6 +27,38 @@ exports.realizarCadastroUsuario = async (application, req, res) => {
     req.body.senha = senhaCriptogafada;
     const novoUsuario = new Usuario(req.body);
     await novoUsuario.save();
-    res.status(200).json({sucesso:true,msg: "Usuário criado com sucesso."})
-
+    res.status(200).json({sucesso:true,msg: "Usuário criado com sucesso."});
+    return;
+};
+exports.realizarLogin = async (application, req, res) => {
+    req.assert('email', 'O seu e-mail não pode ser vazio.').notEmpty();
+    req.assert('senha', 'A senha não pode ser vazia.').notEmpty();
+    const erros = req.validationErrors();
+    if (erros) {
+        res.status(203).json({ erros: erros });
+        return;
+    }
+    const senhaCriptogafada = await crypto.createHash("md5").update(req.body.senha).digest("hex");
+    req.body.senha = senhaCriptogafada;
+    const {email} = req.body.email;
+    const {senha} = req.body.senha;
+    const buscaUsuarios = await Usuario.findOne({email:email,senha:senha});
+    const buscaServidores = await Servidor.findOne({ email: email, senha: senha });
+    if (buscaUsuarios !== null && buscaServidores !== null){
+        res.status(203).json({status:false,msg:"Usuário ou senha inválidos"});
+        return;
+    }
+    if (buscaServidores !== null){
+        req.session.status = true;
+        req.session.nome = buscaUsuarios.nome;
+        req.session.tipoUsuario = buscaUsuarios.tipoUsuario;
+        req.session.escola = buscaUsuarios.escola;
+        res.status(200).json({status:true,msg:"Login autorizado"});
+        return;
+    }
+    req.session.status = true;
+    req.session.nome = buscaServidores.nome;
+    req.session.tipoDired = buscaUsuarios.tipoDired;
+    res.status(200).json({ status: true, msg: "Login autorizado" });
+    return;
 };

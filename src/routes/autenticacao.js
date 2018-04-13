@@ -6,4 +6,7 @@ module.exports = application => {
     application.post('/cadastro-usuario', (req, res) => {
         autenticacao.realizarCadastroUsuario(application, req, res);
     });
+    application.post('/login', (req, res) => {
+        autenticacao.realizarLogin(application, req, res);
+    });
 };
