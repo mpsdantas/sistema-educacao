@@ -46,7 +46,7 @@
 						<label for="exampleSelect2">Não tem conta? <a href="/cadastro-usuario">Cadastre-se</a></label>
 					</form>
 				</div>
-			</div>	
+			</div>
 		</div>
 	</section>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -65,17 +65,16 @@
 				var senha = $('#senha').val();
 				var formData = new FormData();
 				$.ajax({
-            url:'/cadastro',
-            type:'post',
-            data : {
-                email,
-                senha
-            },
-            success : function(data){ 
-                alert('enviado');
-            }
-        });
-				
+                    url:'/cadastro',
+                    type:'post',
+                    data : {
+                        email,
+                        senha
+                    },
+                    success : function(data){
+                        alert('enviado');
+                    }
+                });
 			});
 		});
 	</script>
