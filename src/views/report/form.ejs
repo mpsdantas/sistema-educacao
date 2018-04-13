@@ -74,15 +74,21 @@
 			$('#form-login').submit(function(event) {
 				event.preventDefault();
 				var html  = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
-				var email = $('#email').val();
-				var senha = $('#senha').val();
+				var usuario = $('#usuario').val();
+				var escola = $('#escola').val();
+				var assunto = $('#assunto').val();
+				var titulo = $('#titulo').val();
+				var descricao = $('#descricao').val();
 				var formData = new FormData();
 				$.ajax({
             url:'/cadastro',
             type:'post',
             data : {
-                email,
-                senha
+                usuario,
+                escola,
+                assunto,
+                titulo,
+                descricao
             },
             success : function(data){ 
                 alert('enviado');
