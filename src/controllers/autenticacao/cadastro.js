@@ -61,6 +61,7 @@ exports.realizarLogin = async (application, req, res) => {
         req.session.nome = buscaUsuarios.nome;
         req.session.tipoUsuario = buscaUsuarios.tipoUsuario;
         req.session.tipoDired = buscaUsuarios.tipoDired;
+        req.session.escola = buscaUsuarios.escola;
         res.status(200).json({ status: true, tipo: "Usuario", msg: "Login autorizado" });
         return;
     }   
