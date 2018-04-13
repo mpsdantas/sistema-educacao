@@ -9,4 +9,5 @@ module.exports = application => {
         res.render('admin/stats')
     });
     application.get('/admin/reports', blockRouter.statusAdmin, (req,res) => {res.render('admin/reports')});
+    application.get('/admin/maps', blockRouter.statusAdmin, (req,res) => {res.render('admin/maps')});
 };
