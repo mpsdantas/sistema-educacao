@@ -15,78 +15,82 @@
     <!--
     <link rel="icon" href="imagens/favicon.png">
 -->
-<!-- Bootstrap -->
-<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/estilo.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/estilo.css" rel="stylesheet">
 </head>
 
 <body>
 
-   <% include ../components/usuario/navbar-user %>
-   <br>
-    <div class="container">
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <h4>Meu perfil</h4>
-                        <br>
-                        <div class="card">
-                            <div class="card-header">
-                                Dados 
-                                <button id="botaoEditar" type="submit" class="btn btn-success float-right">Editar</button>
-                            </div>
-                            <div class="card-body"> 
-                                <p class="card-title"><b>Nome:</b> Gabriel Araújo de Souza</p>
-                                <p class="card-text"><b>Email:</b> gabriel_feg@hotmail.com</p>
-                                <p class="card-text"><b>Instituição:</b> Escola Estadual Feliz</p>
-                                <p class="card-text"><b>Cidade:</b> Natal/RN </p>
-                                <a id="botaoEditar" href="/report/listar" class="btn btn-success">Últimos Reports</a>
-                            </div>
-
-
+    <% include ../components/usuario/navbar-user %>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h4>Meu perfil</h4>
+                    <br>
+                    <div class="card">
+                        <div class="card-header">
+                            Dados
+                            <button id="botaoEditar" type="submit" class="btn btn-success float-right">Editar</button>
                         </div>
-                        
+                        <div class="card-body">
+                            <p class="card-title">
+                                <b>Nome:</b> Gabriel Araújo de Souza</p>
+                            <p class="card-text">
+                                <b>Email:</b> gabriel_feg@hotmail.com</p>
+                            <p class="card-text">
+                                <b>Instituição:</b> Escola Estadual Feliz</p>
+                            <p class="card-text">
+                                <b>Cidade:</b> Natal/RN </p>
+                            <a id="botaoEditar" href="/report/listar" class="btn btn-success">Últimos Reports</a>
+                        </div>
+
+
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                     </div>
                 </div>
-    </div>
-    <br>
-
-    <div class="container">
-       
-    </div>
-
-    <% include ../components/footer %>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#form-login').submit(function(event) {
-                event.preventDefault();
-                var usuario = $('#usuario').val();
-                var escola = $('#escola').val();
-                var assunto = $('#assunto').val();
-                var titulo = $('#titulo').val();
-                var descricao = $('#descricao').val();
-                $.ajax({
-                    url:'/realizar-report',
-                    type:'post',
-                    data : {
-                        email,
-                        senha
-                    },
-                    success : function(data){
-                        alert('enviado');
-                    }
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <% include ../components/footer %>
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="/bootstrap/js/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#form-login').submit(function (event) {
+                        event.preventDefault();
+                        var usuario = $('#usuario').val();
+                        var escola = $('#escola').val();
+                        var assunto = $('#assunto').val();
+                        var titulo = $('#titulo').val();
+                        var descricao = $('#descricao').val();
+                        $.ajax({
+                            url: '/realizar-report',
+                            type: 'post',
+                            data: {
+                                email,
+                                senha
+                            },
+                            success: function (data) {
+                                alert('enviado');
+                            }
+                        });
+                    });
                 });
-            });
-        });
-    </script>
+            </script>
 </body>
 
 </html>
