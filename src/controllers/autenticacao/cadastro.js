@@ -52,15 +52,15 @@ exports.realizarLogin = async (application, req, res) => {
     }
     if (buscaServidores !== null){
         req.session.statusAdmin = true;
-        req.session.nome = buscaUsuarios.nome;
-        req.session.tipoUsuario = buscaUsuarios.tipoUsuario;
-        req.session.escola = buscaUsuarios.escola;
+        req.session.nome = buscaServidores.nome;
+        req.session.tipoDired = buscaServidores.tipoDired;
         res.status(200).json({status:true,tipo:"Servidor",msg:"Login autorizado"});
         return;
     }else if(buscaUsuarios !== null){
         req.session.statusUser = true;
-        req.session.nome = buscaServidores.nome;
-        req.session.tipoDired = buscaServidores.tipoDired;
+        req.session.nome = buscaUsuarios.nome;
+        req.session.tipoUsuario = buscaUsuarios.tipoUsuario;
+        req.session.tipoDired = buscaUsuarios.tipoDired;
         res.status(200).json({ status: true, tipo: "Usuario", msg: "Login autorizado" });
         return;
     }   
