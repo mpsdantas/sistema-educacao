@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Report - Sistema de envio de informações Dired</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Configurações do meta para mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#f8f9fa">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#f8f9fa">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+	<!--
+	<link rel="icon" href="imagens/favicon.png">
+-->
+<!-- Bootstrap -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/estilo.css" rel="stylesheet">
+</head>
+<body>
+	<% include ../components/navbar-principal %>
+	<br>
+	<section class="conteudo-principal">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 offset-md-4 col-10 offset-1">
+					<form id="form-login">
+						<div class="form-group" id="erros">
+
+						</div>
+						<div class="form-group">
+							<label for="usuario">Usuário</label>
+							<input type="text" class="form-control" id="usuario" placeholder="Nome do seu usuario">
+						</div>
+						<div class="form-group">
+							<label for="usuario">Escola*</label>
+							<input required type="text" class="form-control" id="usuario" placeholder="Nome da sua escola">
+						</div>
+						<div class="form-group">
+							<label for="selectAssunto">Assunto*</label>
+							<select class="form-control" id="selectAssunto">
+								<option value="sugestão">Sugestão de melhoria</option>
+								<option value="reclamação">Reclamação</option>
+								<option value="outros">Outro</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="titulo">Título*</label>
+							<input required type="text" class="form-control" id="titulo" placeholder="Digite o Título da mensagem">
+						</div>
+						<div class="form-group">
+							<label for="descricao">Descrição*</label>
+							<textarea required id="descricao" class="form-control" rows="4" cols="50">
+							</textarea>
+						</div>
+						<button id="botaoLogin" type="submit" class="btn btn-success btn-block">Enviar</button>
+						<hr>
+					</form>
+				</div>
+			</div>	
+		</div>
+	</section>
+	<% include ../components/footer %>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#form-login').submit(function(event) {
+				event.preventDefault();
+				var html  = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+				var email = $('#email').val();
+				var senha = $('#senha').val();
+				var formData = new FormData();
+				$.ajax({
+            url:'/cadastro',
+            type:'post',
+            data : {
+                email,
+                senha
+            },
+            success : function(data){ 
+                alert('enviado');
+            }
+        });
+				
+			});
+		});
+	</script>
+</body>
+</html>
