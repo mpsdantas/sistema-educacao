@@ -1,9 +1,12 @@
-//const mongoose = require('mongoose');
-//const Usuario = mongoose.model('Usuarios');
+const blockRouter = require('../controllers/blockRouter');
 module.exports = application => {
     application.get('/', (req,res) => {res.render('index')});
-    application.get('/report', (req,res) => {res.render('report/form')});
-    application.get('/admin', (req,res) => {res.render('admin/dashboard')});
-    application.get('/admin/statistics', (req,res) => {res.render('admin/stats')});
-    application.get('/admin/reports', (req,res) => {res.render('admin/reports')});
+    application.get('/report', blockRouter.verify,(req,res) => {
+        res.render('report/form',{nome:req.session.nome});
+    });
+    application.get('/admin', blockRouter.verify, (req,res) => {res.render('admin/dashboard')});
+    application.get('/admin/statistics', blockRouter.verify, (req,res) => {
+        res.render('admin/stats')
+    });
+    application.get('/admin/reports', blockRouter.verify,(req,res) => {res.render('admin/reports')});
 };

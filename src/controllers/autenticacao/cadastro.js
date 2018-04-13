@@ -65,3 +65,8 @@ exports.realizarLogin = async (application, req, res) => {
         return;
     }   
 };
+exports.sair = (application, req, res) => {
+    req.session.destroy( err => {
+        res.redirect('/');
+    });
+}
