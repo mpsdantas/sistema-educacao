@@ -8,6 +8,10 @@ const reportSchema = new Schema({
     assunto: String,
     descricao: String,
     data: String,
+    statusReport: Boolean,
+    dialogo:[{
+        msg: String
+    }]
 });
 
 mongoose.model('Reports', reportSchema);

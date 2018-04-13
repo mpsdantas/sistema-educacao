@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin - Sistema de envio de informações Dired</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/dashboard/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/dashboard/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/dashboard/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/dashboard/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+    	<% include ../components/admin/navbar-admin %>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Todos os Reports</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell fa-fw"></i> Todos os Reports
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Data de Cadastro</th>
+                                                    <th>Escola</th>
+                                                    <th>Respondido?</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Daniel</td>
+                                                    <td>13/04/2018</td>
+                                                    <td>Escola Estadual João Henrique</td>
+                                                    <td>Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Andressa</td>
+                                                    <td>12/04/2018</td>
+                                                    <td>Escola Estadual Barão</td>
+                                                    <td>Não</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Marcus Paulo</td>
+                                                    <td>12/04/2018</td>
+                                                    <td>E. E. J. H. D</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>João Maria</td>
+                                                    <td>11/04/2018</td>
+                                                    <td>Escola Estadual Rafael</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Marcus Paulo</td>
+                                                    <td>12/04/2018</td>
+                                                    <td>E. E. J. H. D</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sandro Neto da Rocha</td>
+                                                    <td>08/04/2018</td>
+                                                    <td>Escola Estadual de Parnamirim</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Prof João</td>
+                                                    <td>08/04/2018</td>
+                                                    <td>E.E. Senhor Galvão</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pedro Jorge</td>
+                                                    <td>06/04/2018</td>
+                                                    <td>Escola Estadual de Currais Novos</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Goten</td>
+                                                    <td>06/04/2018</td>
+                                                    <td>Escola Orange Star</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Professora Maria</td>
+                                                    <td>05/04/2018</td>
+                                                    <td>Escola Estadual Rafael</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gohan</td>
+                                                    <td>05/04/2018</td>
+                                                    <td>Escola Orange Star</td>
+                                                    <td>Sim</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <!-- /.col-lg-4 (nested) -->
+                                <div class="col-lg-8">
+                                    <div id="morris-bar-chart"></div>
+                                </div>
+                                <!-- /.col-lg-8 (nested) -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-primary btn-block">Ver mais</button>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-8 -->
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-check fa-fw"></i> Próximas Ações
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-comment fa-fw"></i> Ver todos os Reports
+                                    <span class="pull-right text-muted small">
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-calendar fa-fw"></i> Reports por mês
+                                    <span class="pull-right text-muted small">
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-envelope fa-fw"></i> Mensagens enviadas
+                                    <span class="pull-right text-muted small">
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- /.list-group -->
+                            <a href="#" class="btn btn-default btn-block">Ver todas</a>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/dashboard/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/dashboard/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/dashboard/vendor/raphael/raphael.min.js"></script>
+    <script src="/dashboard/vendor/morrisjs/morris.min.js"></script>
+    <script src="/dashboard/data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/dashboard/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

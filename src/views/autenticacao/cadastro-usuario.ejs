@@ -103,7 +103,7 @@
 				let senha = $('#senha').val();
 				let repetirSenha = $('#repetir-senha').val();
 				let arrayErrors = new Array(6);
-				/*
+
 				// CONTROLE DE ERROS FRONT END //
 				if(nome==""){
 					arrayErrors[0] = "O nome é um campo obrigatório.";
@@ -124,6 +124,7 @@
 					arrayErrors[5] = "As senhas não são iguais";
 				}
 				// CONTROLE DE ERROS FRONT END //
+
 				var cont = 0;
 				const arrayExibir = new Array();
 				var status = false;
@@ -138,7 +139,7 @@
 					}
 					cont++;
 				}
-				*/
+
 				// LÓGICA PARA ENTRADA DE DADOS //
 				if(status){
 						let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
@@ -183,6 +184,24 @@
 								${msg}
 							</div>`;
 							$('#status').append(htmlAppend);
+						}
+						if(data.sucesso){
+							$.ajax({
+                                url:'/login',
+                                type:'post',
+                                data : {
+                                    email,
+									senha
+                                },
+                                success : function(data){ 
+									if(data.status){
+										window.location.href = '/admin';
+									}
+                                },
+								error: function(XMLHttpRequest, textStatus, errorThrown) { 
+									alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+								} 
+                            });
 						}
 						
 					},

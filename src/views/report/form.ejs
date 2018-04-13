@@ -19,7 +19,7 @@
 <link href="/css/estilo.css" rel="stylesheet">
 </head>
 <body>
-	<% include ../components/navbar-principal %>
+	<% include ../components/usuario/navbar-user %>
 	<br>
 	<section class="conteudo-principal">
 		<div class="container">
@@ -29,6 +29,8 @@
 						<div class="form-group" id="erros">
 
 						</div>
+						<p>Bem vindo <%=nome%>, <br><br>Abaixo você pode comunicar algum problema ou reclamação para a SIEC.</p>
+						<!--
 						<div class="form-group">
 							<label for="usuario">Usuário</label>
 							<input type="text" class="form-control" id="usuario" placeholder="Nome do seu usuario">
@@ -37,6 +39,7 @@
 							<label for="usuario">Escola*</label>
 							<input required type="text" class="form-control" id="usuario" placeholder="Nome da sua escola">
 						</div>
+						<hr>-->
 						<div class="form-group">
 							<label for="selectAssunto">Assunto*</label>
 							<select class="form-control" id="selectAssunto">
@@ -53,9 +56,21 @@
 							<label for="descricao">Descrição*</label>
 							<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
 						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+							<label class="form-check-label" for="defaultCheck1">
+								Enviar anonimamente
+							</label>
+						</div>
+						<br>
 						<button id="botaoLogin" type="submit" class="btn btn-success btn-block">Enviar</button>
 						<hr>
 					</form>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
 				</div>
 			</div>
 		</div>
@@ -71,7 +86,6 @@
 		$(document).ready(function() {
 			$('#form-login').submit(function(event) {
 				event.preventDefault();
-				var html  = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
 				var usuario = $('#usuario').val();
 				var escola = $('#escola').val();
 				var assunto = $('#assunto').val();
@@ -79,7 +93,7 @@
 				var descricao = $('#descricao').val();
 				var formData = new FormData();
 				$.ajax({
-                    url:'/cadastro',
+                    url:'/realizar-report',
                     type:'post',
                     data : {
                         email,
