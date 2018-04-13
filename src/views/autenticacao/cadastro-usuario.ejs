@@ -19,14 +19,14 @@
 <link href="css/estilo.css" rel="stylesheet">
 </head>
 <body>
-	<% include ../navbars/navbar-principal %>
+	<% include ../components/navbar-principal %>
 	<br>
 	<br>
 	<section class="conteudo-principal">
 		<div class="container">
 			<div class="row">
                 <div class="col-md-6 offset-md-3 col-10 offset-1">
-                    <form>
+                    <form id="form-cadastro">
                         <div class="form-group">
                             <label for="nome">Nome:</label>
                             <input type="text" class="form-control" id="nome" placeholder="Insira seu email aqui.">
@@ -37,46 +37,46 @@
                         </div>
 						<div class="form-group">
 							<label for="selectTipoUsuario">Eu sou um:</label>
-							<select class="form-control" id="selectTipoUsuario">
+							<select name="tipoUsuario" class="form-control" id="selectTipoUsuario">
 								<option value="Aluno">Aluno(a)</option>
 								<option value="Professor">Professor(a)</option>
 								<option value="pais">Pais de aluno(a)</option>
 							</select>
 						</div>
 						<div class="form-group">
-                            <label for="email">Escola:</label>
+                            <label for="escola">Escola:</label>
                             <input type="text" class="form-control" id="escola" placeholder="Insira o nome da sua escola.">
                         </div>
 						<div class="form-group">
 							<label for="selectTipoDired">Dired que pertence a sua escola:</label>
-							<select class="form-control" id="selectTipoDired">
+							<select name="tipoDired" class="form-control" id="selectTipoDired">
 								<option value="natal">Natal</option>
 								<option value="parnamirin">Parnamirin</option>
 								<option value="Nova Cruz">Nova Cruz</option>
 								<option value="São Paulo do Potengi">São Paulo do Potengi</option>
-								<option>Ceará Mirim</option>
-								<option>Macau</option>
-								<option>Santa Cruz</option>
-								<option>Angicos</option>
-								<option>Currais Novos</option>
-								<option>Caicó</option>
-								<option>Assu</option>
-								<option>Mossoró</option>
-								<option>Apodí</option>
-								<option>Umarizal</option>
-								<option>Pau dos Ferros</option>
-								<option>João Câmara</option>
+								<option value="Ceará Mirim">Ceará Mirim</option>
+								<option value="Macau">Macau</option>
+								<option value="Santa Cruz">Santa Cruz</option>
+								<option value="Angicos">Angicos</option>
+								<option value="Currais Novos">Currais Novos</option>
+								<option value="Caicó">Caicó</option>
+								<option value="Assu">Assu</option>
+								<option value="Mossoró">Mossoró</option>
+								<option value="Apodí">Apodí</option>
+								<option value="Umarizal">Umarizal</option>
+								<option value="Pau dos Ferros">Pau dos Ferros</option>
+								<option value="João Câmara">João Câmara</option>
 							</select>
 						</div>
 						<div class="form-group">
-                            <label for="senha">Escola:</label>
+                            <label for="senha">Senha:</label>
                             <input type="password" class="form-control" id="senha" placeholder="Insira sua senha aqui.">
                         </div>
 						<div class="form-group">
-                            <label for="repetir-senha">Escola:</label>
+                            <label for="repetir-senha">Repetir senha:</label>
                             <input type="password" class="form-control" id="repetir-senha" placeholder="Repita sua senha Insira sua senha aqui.">
                         </div>
-						<button type="button" class="btn btn-block btn-success">Realizar cadastro</button>
+						<button type="submit" class="btn btn-block btn-success">Realizar cadastro</button>
                     </form> 
 					<br><br>                   
                 </div>
@@ -90,5 +90,41 @@
   crossorigin="anonymous"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#form-cadastro').submit(function(event) {
+				event.preventDefault();
+				var html  = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+				const nome = $('#nome').val();
+				const email = $('#email').val();
+				const tipoUsuario = $('select[name=tipoUsuario]').val();
+				const tipoDired = $('select[name=tipoDired]').val();
+				const escola = $('#escola').val();
+				const senha = $('#senha').val();
+				const repetirSenha = $('#repetir-senha').val();
+				const dadosEnvio ={
+					nome,
+					email,
+					tipoUsuario,
+					tipoDired,
+					escola,
+					senha,
+					repetirSenha
+				};
+				console.log(dadosEnvio);
+				$.ajax({
+					url:'/cadastro',
+					type:'post',
+					data : {
+						dadosEnvio
+					},
+					success : function(data){ 
+						alert('enviado');
+					}
+				});
+				
+			});
+		});
+	</script>
 </body>
 </html>
