@@ -10,7 +10,7 @@ module.exports = application => {
     application.post('/login', (req, res) => {
         autenticacao.realizarLogin(application, req, res);
     });
-    application.get('/sair', blockRouter.verify, (req, res) => {
+    application.get('/sair', blockRouter.status, (req, res) => {
         autenticacao.sair(application, req, res);
     });
 };
