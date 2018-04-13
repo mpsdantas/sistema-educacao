@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Report - Sistema de envio de informações Dired</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Configurações do meta para mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#f8f9fa">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#f8f9fa">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+	<!--
+	<link rel="icon" href="imagens/favicon.png">
+-->
+<!-- Bootstrap -->
+<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/estilo.css" rel="stylesheet">
+</head>
+<body>
+	<% include ../components/usuario/navbar-user %>
+	<br>
+	<section class="conteudo-principal">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2 col-8 offset-1">
+					<p><%=nome%>, <br><br>Abaixo você pode ver todos os Reports enviados para a SEEC.</p>
+					<div class="card">
+					  <div class="card-header">
+					  A merenda da minha Escola está muito ruim [TITULO]
+					  </div>
+					  <div class="card-body">
+					    <p class="card-text">Nos últimos meses a merenda da minha escola não tem um sabor legal. As vezes até falta, queria melhorar a merenda e saber se tudo está sendo repassado direitinho.<br><span class="pull-right text-muted small">Enviado em 12 de Abril de 2018</span></p>
+					    <a href="#" class="btn btn-primary">Ver Detalhes</a>
+					  </div>
+					</div>
+					<br>
+					<div class="card">
+					  <div class="card-header">
+					  Meu professor tem faltado muito [TITULO]
+					  </div>
+					  <div class="card-body">
+					    <p class="card-text">Gostaria de avisar que meu professor de História, Ailson, tem faltado bastante, apesar da turma comemorar, fico muito indignado.<br><span class="pull-right text-muted small">Enviado em 19 de Fevereiro de 2018</span></p>
+					    <a href="#" class="btn btn-primary">Ver Detalhes</a>
+					  </div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+	</section>
+	<% include ../components/footer %>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#form-login').submit(function(event) {
+				event.preventDefault();
+				var usuario = $('#usuario').val();
+				var escola = $('#escola').val();
+				var assunto = $('#assunto').val();
+				var titulo = $('#titulo').val();
+				var descricao = $('#descricao').val();
+				var formData = new FormData();
+				$.ajax({
+                    url:'/realizar-report',
+                    type:'post',
+                    data : {
+                        email,
+                        senha
+                    },
+                    success : function(data){
+                        alert('enviado');
+                    }
+                });
+			});
+		});
+	</script>
+</body>
+</html>
