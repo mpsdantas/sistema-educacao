@@ -19,21 +19,55 @@
 <link href="css/estilo.css" rel="stylesheet">
 </head>
 <body>
+	<% include ../navbars/navbar-principal %>
 	<br>
 	<br>
 	<section class="conteudo-principal">
 		<div class="container">
 			<div class="row">
-                <div class="col-md-8 offset-md-2 col-10 offset-1">
+                <div class="col-md-6 offset-md-3 col-10 offset-1">
                     <form>
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Nome:</label>
+                            <label for="nome">Nome:</label>
                             <input type="text" class="form-control" id="nome" placeholder="Insira seu email aqui.">
                         </div>
                         <div class="form-group">
-                            <label for="formGroupExampleInput2">E-mail:</label>
+                            <label for="email">E-mail:</label>
                             <input type="text" class="form-control" id="email" placeholder="Insira o seu e-mail aqui.">
                         </div>
+						<div class="form-group">
+							<label for="selectTipoUsuario">Eu sou um:</label>
+							<select class="form-control" id="selectTipoUsuario">
+								<option value="Aluno">Aluno(a)</option>
+								<option value="Professor">Professor(a)</option>
+								<option value="pais">Pais de aluno(a)</option>
+							</select>
+						</div>
+						<div class="form-group">
+                            <label for="email">Escola:</label>
+                            <input type="text" class="form-control" id="escola" placeholder="Insira o nome da sua escola.">
+                        </div>
+						<div class="form-group">
+							<label for="selectTipoDired">Dired que pertence a sua escola:</label>
+							<select class="form-control" id="selectTipoDired">
+								<option value="natal">Natal</option>
+								<option value="parnamirin">Parnamirin</option>
+								<option value="Nova Cruz">Nova Cruz</option>
+								<option value="São Paulo do Potengi">São Paulo do Potengi</option>
+								<option>Professor(a)</option>
+								<option>Pais de aluno(a)</option>
+								<option>Aluno(a)</option>
+								<option>Professor(a)</option>
+								<option>Pais de aluno(a)</option>
+								<option>Aluno(a)</option>
+								<option>Professor(a)</option>
+								<option>Pais de aluno(a)</option>
+								<option>Aluno(a)</option>
+								<option>Professor(a)</option>
+								<option>Pais de aluno(a)</option>
+								<option>Pais de aluno(a)</option>
+							</select>
+						</div>
                     </form>                    
                 </div>
 			</div>	
