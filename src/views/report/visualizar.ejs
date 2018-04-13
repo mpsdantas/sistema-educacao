@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Report - Sistema de envio de informações Dired</title>
 	<meta charset="utf-8">
@@ -14,80 +15,87 @@
 	<!--
 	<link rel="icon" href="imagens/favicon.png">
 -->
-<!-- Bootstrap -->
-<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/estilo.css" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/estilo.css" rel="stylesheet">
 </head>
+
 <body>
 	<% include ../components/usuario/navbar-user %>
-	<br>
-	<div class="container">
-				<div class="row">
-					<div class="col-md-8 offset-md-2">
-						<h4>Detalhes sobre o Report</h4>
-						<br>
-						<div class="card">
-							<div class="card-header">
-							    Seu Report Aqui
-							</div>
-							<div class="card-body">	
-								<h5 class="card-title"><b>Título:</b> Professor não me atende.</h5>
-								<p class="card-text"><b>Descrição:</b> Depois de muita procura, meu professor continua me ingnorando. Estou muito chateado! Brabo mesmo.</p>
-							</div>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<h4>Detalhes sobre o Report</h4>
+					<br>
+					<div class="card">
+						<div class="card-header">
+							Seu Report Aqui
 						</div>
-						<hr>
-						<h5>Repostas: (1)</h5>
-						<div class="card">
-							<div class="card-body">	
-								<p class="card-text"><b>Resposta:</b> Olá, João. Já identificamos o problema, estamos tomando providências para resolve-lo.</p>
-								<p class="pull-right text-muted small">Enviado em 12 de Fevereiro de 2018.</p>
-							</div>
+						<div class="card-body">
+							<h5 class="card-title">
+								<b>Título:</b> Professor não me atende.</h5>
+							<p class="card-text">
+								<b>Descrição:</b> Depois de muita procura, meu professor continua me ingnorando. Estou muito chateado! Brabo mesmo.</p>
 						</div>
-						<br>
+					</div>
+					<hr>
+					<h5>Repostas: (1)</h5>
+					<div class="card">
+						<div class="card-body">
+							<p class="card-text">
+								<b>Resposta:</b> Olá, João. Já identificamos o problema, estamos tomando providências para resolve-lo.</p>
+							<p class="pull-right text-muted small">Enviado em 12 de Fevereiro de 2018.</p>
+						</div>
+					</div>
+					<br>
+					<hr>
+					<form id="form-login">
+						<div class="form-group">
+							<label for="descricao">
+								<h5>Responder ao Report:</h5>
+							</label>
+							<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
+						</div>
+						<button id="botaoLogin" type="submit" class="btn btn-success">Enviar</button>
 						<hr>
-						<form id="form-login">
-							<div class="form-group">
-								<label for="descricao"><h5>Responder ao Report:</h5></label>
-								<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
-							</div>
-							<button id="botaoLogin" type="submit" class="btn btn-success">Enviar</button>
-							<hr>
-						</form>	
+					</form>
 				</div>
 				<div class="row">
 					<div class="col-md-8 offset-md-2">
 					</div>
 				</div>
-	</div>
-	<% include ../components/footer %>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="/bootstrap/js/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#form-login').submit(function(event) {
-				event.preventDefault();
-				var usuario = $('#usuario').val();
-				var escola = $('#escola').val();
-				var assunto = $('#assunto').val();
-				var titulo = $('#titulo').val();
-				var descricao = $('#descricao').val();
-				$.ajax({
-                    url:'/realizar-report',
-                    type:'post',
-                    data : {
-                        email,
-                        senha
-                    },
-                    success : function(data){
-                        alert('enviado');
-                    }
-                });
+			</div>
+		</div>
+		</div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		 crossorigin="anonymous"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="/bootstrap/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$('#form-login').submit(function (event) {
+					event.preventDefault();
+					var usuario = $('#usuario').val();
+					var escola = $('#escola').val();
+					var assunto = $('#assunto').val();
+					var titulo = $('#titulo').val();
+					var descricao = $('#descricao').val();
+					$.ajax({
+						url: '/realizar-report',
+						type: 'post',
+						data: {
+							email,
+							senha
+						},
+						success: function (data) {
+							alert('enviado');
+						}
+					});
+				});
 			});
-		});
-	</script>
+		</script>
 </body>
+
 </html>
