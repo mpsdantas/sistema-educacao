@@ -26,6 +26,7 @@
 		<div class="container">
 			<div class="row">
                 <div class="col-md-6 offset-md-3 col-10 offset-1">
+					<div id="status"></div>
                     <form id="form-cadastro">
                         <div class="form-group">
                             <label for="nome">Nome:</label>
@@ -94,7 +95,6 @@
 		$(document).ready(function() {
 			$('#form-cadastro').submit(function(event) {
 				event.preventDefault();
-				var html  = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
 				const nome = $('#nome').val();
 				const email = $('#email').val();
 				const tipoUsuario = $('select[name=tipoUsuario]').val();
@@ -102,27 +102,77 @@
 				const escola = $('#escola').val();
 				const senha = $('#senha').val();
 				const repetirSenha = $('#repetir-senha').val();
-				const dadosEnvio ={
-					nome,
-					email,
-					tipoUsuario,
-					tipoDired,
-					escola,
-					senha,
-					repetirSenha
-				};
-				console.log(dadosEnvio);
+				const arrayErrors = new Array(6);
+
+				// CONTROLE DE ERROS FRONT END //
+				if(nome==""){
+					arrayErrors[0] = "O nome é um campo obrigatório.";
+				}
+				if(email==""){
+					arrayErrors[1] = "O E-mail é um campo obrigatório.";
+				}
+				if(escola==""){
+					arrayErrors[2] = "A escola é um campo obrigatório.";
+				}
+				if(senha==""){
+					arrayErrors[3] = "A senha é um campo obrigatório.";
+				}
+				if(repetirSenha==""){
+					arrayErrors[4] = "Por favor repita a senha.";
+				}
+				if(senha!==repetirSenha){
+					arrayErrors[5] = "As senhas não são iguais";
+				}
+				// CONTROLE DE ERROS FRONT END //
+
+				// LÓGICA PARA ENTRADA DE DADOS //
+				if(arrayErrors.length>0){
+					var cont = 0;
+					const arrayExibir = new Array();
+					for(erros of arrayErrors){
+						if(erros!==undefined){
+							arrayExibir[cont] = erros;
+							cont++;
+						}else{
+							arrayExibir[cont] = "";
+							cont++;
+						}
+					}
+					console.log(arrayExibir);
+						let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						${arrayExibir[0]}<br>
+						${arrayExibir[1]}<br>
+						${arrayExibir[2]}<br>
+						${arrayExibir[3]}<br>
+						${arrayExibir[4]}<br>
+						${arrayExibir[5]}<br>
+					</div>`;
+					$('#status').append(htmlAppend);
+					return;
+				}
+				// LÓGICA PARA ENTRADA DE DADOS //
+
+				//REQUISIÇÃO POST SERVIDOR//
 				$.ajax({
-					url:'/cadastro',
+					url:'/cadastro-usuario',
 					type:'post',
 					data : {
-						dadosEnvio
+						nome,
+						email,
+						tipoUsuario,
+						tipoDired,
+						escola,
+						senha,
+						repetirSenha
 					},
 					success : function(data){ 
 						alert('enviado');
 					}
 				});
-				
+				//REQUISIÇÃO POST SERVIDOR//
 			});
 		});
 	</script>

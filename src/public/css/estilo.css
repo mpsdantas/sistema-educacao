@@ -26,6 +26,7 @@ footer{
 	padding-bottom: 0.4rem;
 }
 .navbar {
+  min-height: 8%;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -56,6 +57,9 @@ footer{
     }
     .margin-mobile{
     	margin-top: 20px;
+    }
+    .mobile{
+        display: none;
     }
 }
 
