@@ -88,13 +88,15 @@
 				event.preventDefault();
 				let assunto = $('select[name=assunto]').val();
 				let descricao = $('#descricao').val();
+				let titulo = $('#titulo').val();
 				let anonimo = $("#checkAnonimo").is( ":checked" )
 				var dados = {
 					assunto,
 					descricao,
-					anonimo
+					anonimo,
+					titulo
 				}
-				console.log(dados);
+				//console.log(dados);
 				
 				$.ajax({
                     url:'/realizar-report',
@@ -102,10 +104,36 @@
                     data : {
                         assunto,
 						descricao,
-						anonimo
+						anonimo,
+						titulo
                     },
-                    success : function(data){
-                        alert('enviado');
+                    success : function(data, status, xhr){
+                        if(xhr.status==203){
+							var msg = "";
+							for(let i =0; i<data.erros.length; i++){
+								msg += data.erros[i].msg + '<br>';
+							}
+							let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${msg}
+							</div>`;
+							$('#erros').append(htmlAppend);
+						}
+						if(data.status){
+							let htmlAppend = `<div class="alert alert-success alert-dismissible fade 					show" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${data.msg}
+							</div>`;
+							$('select[name=assunto]').val('');
+							$('#descricao').val('');
+							$('#titulo').val('');
+							$("#checkAnonimo").val('false');
+							$('#erros').append(htmlAppend);
+						}
                     }
                 });
 			});

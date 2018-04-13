@@ -8,7 +8,7 @@ const reportSchema = new Schema({
     titulo: String,
     assunto: String,
     descricao: String,
-    data: String,
+    data: Date,
     statusReport: Boolean,
     dialogo:[{
         msg: String
