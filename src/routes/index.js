@@ -24,4 +24,8 @@ module.exports = application => {
     application.get('/perfil/user-perfil', blockRouter.statusUser, (req, res) => {
         res.render('perfil/user-perfil', {nome:req.session.nome})
     });
+
+    application.get('/perfil/editar', blockRouter.statusUser, (req, res) => {
+        res.render('perfil/editar', {nome:req.session.nome})
+    })
 };
