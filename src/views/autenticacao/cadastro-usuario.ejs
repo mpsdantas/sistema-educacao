@@ -19,14 +19,14 @@
 <link href="css/estilo.css" rel="stylesheet">
 </head>
 <body>
-	<% include ../navbars/navbar-principal %>
+	<% include ../components/navbar-principal %>
 	<br>
 	<br>
 	<section class="conteudo-principal">
 		<div class="container">
 			<div class="row">
                 <div class="col-md-6 offset-md-3 col-10 offset-1">
-                    <form>
+                    <form id="form-cadastro">
                         <div class="form-group">
                             <label for="nome">Nome:</label>
                             <input type="text" class="form-control" id="nome" placeholder="Insira seu email aqui.">
@@ -37,19 +37,19 @@
                         </div>
 						<div class="form-group">
 							<label for="selectTipoUsuario">Eu sou um:</label>
-							<select class="form-control" id="selectTipoUsuario">
+							<select name="tipoUsuario" class="form-control" id="selectTipoUsuario">
 								<option value="Aluno">Aluno(a)</option>
 								<option value="Professor">Professor(a)</option>
 								<option value="pais">Pais de aluno(a)</option>
 							</select>
 						</div>
 						<div class="form-group">
-                            <label for="email">Escola:</label>
+                            <label for="escola">Escola:</label>
                             <input type="text" class="form-control" id="escola" placeholder="Insira o nome da sua escola.">
                         </div>
 						<div class="form-group">
 							<label for="selectTipoDired">Dired que pertence a sua escola:</label>
-							<select class="form-control" id="selectTipoDired">
+							<select name="tipoDired" class="form-control" id="selectTipoDired">
 								<option value="natal">Natal</option>
 								<option value="parnamirin">Parnamirin</option>
 								<option value="Nova Cruz">Nova Cruz</option>
@@ -90,5 +90,32 @@
   crossorigin="anonymous"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#form-cadastro').submit(function(event) {
+				event.preventDefault();
+				var html  = '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+				const nome = $('#nome').val();
+				const email = $('#email').val();
+				const tipoUsuario = $('select[name=tipoUsuario]').val();
+				const tipoDired = $('select[name=selector]').val();
+				const escola = $('#escola').val();
+				var senha = $('#senha').val();
+				var formData = new FormData();
+				$.ajax({
+					url:'/cadastro',
+					type:'post',
+					data : {
+						email,
+						senha
+					},
+					success : function(data){ 
+						alert('enviado');
+					}
+				});
+				
+			});
+		});
+	</script>
 </body>
 </html>
