@@ -186,7 +186,22 @@
 							$('#status').append(htmlAppend);
 						}
 						if(data.sucesso){
-							//Fazer requisição post
+							$.ajax({
+                                url:'/login',
+                                type:'post',
+                                data : {
+                                    email,
+									senha
+                                },
+                                success : function(data){ 
+									if(data.status){
+										window.location.href = '/admin';
+									}
+                                },
+								error: function(XMLHttpRequest, textStatus, errorThrown) { 
+									alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+								} 
+                            });
 						}
 						
 					},

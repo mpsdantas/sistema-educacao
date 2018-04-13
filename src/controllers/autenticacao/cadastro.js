@@ -22,13 +22,14 @@ exports.realizarCadastroUsuario = async (application, req, res) => {
         const erroUsuario = [{msg: "Usuário já cadastrado com esse email."}];
         res.status(203).json({ erros: erroUsuario});
         return;
+    }else{
+        const senhaCriptogafada = await crypto.createHash("md5").update(req.body.senha).digest("hex");
+        req.body.senha = senhaCriptogafada;
+        const novoUsuario = new Usuario(req.body);
+        await novoUsuario.save();
+        res.status(200).json({ sucesso: true, msg: "Usuário criado com sucesso." });
+        return;
     }
-    const senhaCriptogafada = await crypto.createHash("md5").update(req.body.senha).digest("hex");
-    req.body.senha = senhaCriptogafada;
-    const novoUsuario = new Usuario(req.body);
-    await novoUsuario.save();
-    res.status(200).json({sucesso:true,msg: "Usuário criado com sucesso."});
-    return;
 };
 exports.realizarLogin = async (application, req, res) => {
     req.assert('email', 'O seu e-mail não pode ser vazio.').notEmpty();
@@ -40,12 +41,13 @@ exports.realizarLogin = async (application, req, res) => {
     }
     const senhaCriptogafada = await crypto.createHash("md5").update(req.body.senha).digest("hex");
     req.body.senha = senhaCriptogafada;
-    const {email} = req.body.email;
-    const {senha} = req.body.senha;
+    const {email} = req.body;
+    const {senha} = req.body;
     const buscaUsuarios = await Usuario.findOne({email:email,senha:senha});
     const buscaServidores = await Servidor.findOne({ email: email, senha: senha });
-    if (buscaUsuarios !== null && buscaServidores !== null){
-        res.status(203).json({status:false,msg:"Usuário ou senha inválidos"});
+    if (buscaUsuarios === null && buscaServidores === null){
+        const erroUsuario = [{ status: false, msg: "Usuário ou senha inválidos" }];
+        res.status(203).json({erros:erroUsuario});
         return;
     }
     if (buscaServidores !== null){
@@ -53,12 +55,13 @@ exports.realizarLogin = async (application, req, res) => {
         req.session.nome = buscaUsuarios.nome;
         req.session.tipoUsuario = buscaUsuarios.tipoUsuario;
         req.session.escola = buscaUsuarios.escola;
-        res.status(200).json({status:true,msg:"Login autorizado"});
+        res.status(200).json({status:true,tipo:"Servidor",msg:"Login autorizado"});
         return;
-    }
-    req.session.status = true;
-    req.session.nome = buscaServidores.nome;
-    req.session.tipoDired = buscaUsuarios.tipoDired;
-    res.status(200).json({ status: true, msg: "Login autorizado" });
-    return;
+    }else if(buscaUsuarios !== null){
+        req.session.status = true;
+        req.session.nome = buscaUsuarios.nome;
+        req.session.tipoDired = buscaUsuarios.tipoDired;
+        res.status(200).json({ status: true, tipo: "Usuario", msg: "Login autorizado" });
+        return;
+    }   
 };

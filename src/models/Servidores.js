@@ -7,5 +7,4 @@ const servidoresSchema = new Schema({
     tipoDired: String,
     senha: String
 });
-
 mongoose.model('Servidores', servidoresSchema);
