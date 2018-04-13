@@ -9,7 +9,7 @@ exports.realizarCadastroUsuario = async (application, req, res) => {
     req.assert('escola', 'A escola não pode ser vazia.').notEmpty();
     req.assert('senha', 'A senha não pode ser vazia.').notEmpty();
     req.assert('repetirSenha', 'O campo repetir senha não pode ser vazio.').notEmpty();
-    req.assert('email', 'Digite um formato de email valido: usuario@email.com').isEmail();  
+    req.assert('email', 'Digite um formato de email valido: usuario@email.com').isEmail();
     req.assert('senha', 'As senhas não são iguais').equals(req.body.repetirSenha);
     const erros = req.validationErrors();
     if(erros){
