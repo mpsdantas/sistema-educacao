@@ -1,3 +1,5 @@
 module.exports = application => {
-    application.get('/cadastro-usuario', (req, res) => { res.send('Rota funcionando') });
+    application.get('/cadastro-usuario', (req, res) => { 
+        res.render('autenticacao/cadastro-usuario')
+    });
 };
