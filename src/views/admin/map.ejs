@@ -131,7 +131,6 @@
                     max = parseInt(data[i][1]);
                 }
             }
-            console.log(max)
             // Initiate the chart
             chart = Highcharts.mapChart('chart_div', {
                 chart: {
@@ -190,6 +189,9 @@
         var colors = ['#001FA1', '#D43A15']
         $('#mapa_select').change( function(){
             chart.update({
+                title: {
+                    text: titles[i]
+                },
                 colorAxis: {
                     maxColor: colors[i]
                 },
