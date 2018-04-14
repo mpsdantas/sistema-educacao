@@ -12,29 +12,28 @@
     <title>Admin - Sistema de envio de informações Dired</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="dashboard/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/dashboard/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="dashboard/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/dashboard/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
 
     <!-- Custom CSS -->
-    <link href="dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="dashboard/vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="/dashboard/vendor/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="dashboard/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/dashboard/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
-
+    <% include ../components/admin/navbar-admin %>
     <div id="wrapper">
-
-    	<% include ../components/admin/navbar-admin %>
-
         <div id="page-wrapper">
+
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
@@ -44,14 +43,14 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
+                                    <i class="fa fa-envelope fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <div class="huge"><%=reportsAbertos.length%></div>
                                     <div>Reports Abertos!</div>
                                 </div>
                             </div>
@@ -70,10 +69,10 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
+                                    <i class="fa fa-check fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge"><%=reportsFechados.length%></div>
                                     <div>Reports Respondidos!</div>
                                 </div>
                             </div>
@@ -95,7 +94,7 @@
                                     <i class="fa fa-calendar fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge"><%=reportsEsseMes.length%></div>
                                     <div>Total nesse mês!</div>
                                 </div>
                             </div>
@@ -110,14 +109,14 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
+                    <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
+                                    <i class="fa fa-warning fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge"><%=reportsReclamacoes.length%></div>
                                     <div>Total Reclamações!</div>
                                 </div>
                             </div>
@@ -154,30 +153,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                        		<tr>
-                                        			<td>Daniel</td>
-                                        			<td>13/04/2018</td>
-                                        			<td>Escola Estadual João Henrique</td>
-                                        			<td>Não</td>
-                                        		</tr>
-                                        		<tr>
-                                        			<td>Andressa</td>
-                                        			<td>12/04/2018</td>
-                                        			<td>Escola Estadual Barão</td>
-                                        			<td>Não</td>
-                                        		</tr>
-                                        		<tr>
-                                        			<td>Marcus Paulo</td>
-                                        			<td>12/04/2018</td>
-                                        			<td>E. E. J. H. D</td>
-                                        			<td>Sim</td>
-                                        		</tr>
-                                        		<tr>
-                                        			<td>João Maria</td>
-                                        			<td>11/04/2018</td>
-                                        			<td>Escola Estadual Rafael</td>
-                                        			<td>Sim</td>
-                                        		</tr>
+                                                <%for(let i =0; i<reportsTotal.length;i++){%>
+                                                    <tr>
+                                                        <td><%=reportsTotal[i].nome%></td>
+                                                        <td>13/04/2018</td>
+                                                        <td><%=reportsTotal[i].escola%></td>
+                                                        <td>
+                                                        <%if(!reportsTotal[i].statusReport){%>
+                                                            Não
+                                                        <%}else{%>
+                                                            Sim
+                                                        <%}%>
+                                                        </td>
+                                        		    </tr>
+                                                <%}%>
                                             </tbody>
                                         </table>
                                     </div>
@@ -237,21 +226,20 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="dashboard/vendor/jquery/jquery.min.js"></script>
+    <script src="/dashboard/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="dashboard/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="/dashboard/vendor/metisMenu/metisMenu.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="dashboard/vendor/raphael/raphael.min.js"></script>
-    <script src="dashboard/vendor/morrisjs/morris.min.js"></script>
-    <script src="dashboard/data/morris-data.js"></script>
+    <script src="/dashboard/vendor/raphael/raphael.min.js"></script>
+    <script src="/dashboard/vendor/morrisjs/morris.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="dashboard/dist/js/sb-admin-2.js"></script>
+    <script src="/dashboard/dist/js/sb-admin-2.js"></script>
 
 </body>
 

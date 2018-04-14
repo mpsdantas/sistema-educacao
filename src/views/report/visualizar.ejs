@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Report - Sistema de envio de informações Dired</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- Configurações do meta para mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#f8f9fa">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#f8f9fa">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+	<!--
+	<link rel="icon" href="imagens/favicon.png">
+-->
+	<!-- Bootstrap -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/estilo.css" rel="stylesheet">
+</head>
+
+<body>
+	<% include ../components/usuario/navbar-user %>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<h4>Detalhes sobre o Report</h4>
+					<br>
+					<div class="card">
+						<div class="card-header">
+							Seu Report Aqui
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">
+								<b>Título:</b> <%=reportIndividual.titulo%></h5>
+							<p class="card-text">
+								<b>Descrição:</b><%=reportIndividual.descricao%></p>
+						</div>
+					</div>
+					<hr>
+					<h5>Repostas: (<%=reportIndividual.dialogo.length-1%>)</h5>
+					<%for(let i=reportIndividual.dialogo.length-1; i>=1;i--){%>
+						<div class="card">
+							<div class="card-body">
+								<p class="card-text">
+									<b>Resposta:</b> <%=reportIndividual.dialogo[i].msg%></p>
+								<p class="pull-right text-muted small">Enviado em <%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%></p>
+								
+							</div>
+						</div>
+						<br>
+					<%}%>
+					<br>
+					<hr>
+					<form id="form-login">
+						<div class="form-group">
+							<label for="descricao">
+								<h5>Responder ao Report:</h5>
+							</label>
+							<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
+						</div>
+						<button id="botaoLogin" type="submit" class="btn btn-success">Enviar</button>
+						<hr>
+					</form>
+				</div>
+			</div>
+		</div>
+		<% include ../components/footer %>
+			</div>
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+			<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			 crossorigin="anonymous"></script>
+			<!-- Include all compiled plugins (below), or include individual files as needed -->
+			<script src="/bootstrap/js/bootstrap.min.js"></script>
+			<script>
+				$(document).ready(function () {
+					$('#form-login').submit(function (event) {
+						event.preventDefault();
+						let descricao = $('#descricao').val();
+						let id = `<%=reportIndividual._id%>`;
+						if(descricao==""){
+							alert('Insira uma resposta');
+							return;
+						}
+						$.ajax({
+							url: '/enviar-respost-report',
+							type: 'post',
+							data: {
+								id,
+								descricao
+							},
+							success: function (data) {
+								alert('Resposta enviada com sucesso.');
+								location.reload();
+							}
+						});
+					});
+				});
+			</script>
+</body>
+
+</html>

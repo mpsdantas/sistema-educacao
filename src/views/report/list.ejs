@@ -21,39 +21,31 @@
 <body>
 	<% include ../components/usuario/navbar-user %>
 	<br>
-	<section class="conteudo-principal">
-		<div class="container">
+	<div class="container">
+		<%if(reports.length>0){%>
+			<%for(let i=0;i<reports.length;i++){%>
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title"><%=reports[i].titulo%></h5>
+								<p class="card-text"><%=reports[i].descricao%></p>
+								<a href="/ver-reports/<%=reports[i]._id%>" class="btn btn-primary">Ver detalhes</a>
+							</div>
+						</div>
+						<br>
+					</div>	
+				</div>
+			<%}%>
+		<%}else{%>
 			<div class="row">
-				<div class="col-md-8 offset-md-2 col-8 offset-1">
-					<p><%=nome%>, <br><br>Abaixo você pode ver todos os Reports enviados para a SEEC.</p>
-					<div class="card">
-					  <div class="card-header">
-					  A merenda da minha Escola está muito ruim [TITULO]
-					  </div>
-					  <div class="card-body">
-					    <p class="card-text">Nos últimos meses a merenda da minha escola não tem um sabor legal. As vezes até falta, queria melhorar a merenda e saber se tudo está sendo repassado direitinho.<br><span class="pull-right text-muted small">Enviado em 12 de Abril de 2018</span></p>
-					    <a href="#" class="btn btn-primary">Ver Detalhes</a>
-					  </div>
-					</div>
-					<br>
-					<div class="card">
-					  <div class="card-header">
-					  Meu professor tem faltado muito [TITULO]
-					  </div>
-					  <div class="card-body">
-					    <p class="card-text">Gostaria de avisar que meu professor de História, Ailson, tem faltado bastante, apesar da turma comemorar, fico muito indignado.<br><span class="pull-right text-muted small">Enviado em 19 de Fevereiro de 2018</span></p>
-					    <a href="#" class="btn btn-primary">Ver Detalhes</a>
-					  </div>
-					</div>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+				<div class="col-md-8 offset-md-2">
+					<p>Não existem reports</p>
 				</div>
 			</div>
-		</div>
-	</section>
+		<%}%>
+		
+	</div>
 	<% include ../components/footer %>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -70,7 +62,6 @@
 				var assunto = $('#assunto').val();
 				var titulo = $('#titulo').val();
 				var descricao = $('#descricao').val();
-				var formData = new FormData();
 				$.ajax({
                     url:'/realizar-report',
                     type:'post',

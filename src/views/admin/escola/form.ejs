@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin - Sistema de envio de informações Dired</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/dashboard/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/dashboard/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/dashboard/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/dashboard/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <% include ../../components/admin/navbar-admin %>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Cadastrar uma nova Escola</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2 col-10 offset-1">
+                            <div id="erros"></div>
+                            <form id="form-login">
+                                <!--
+                        <div class="form-group">
+                            <label for="usuario">Usuário</label>
+                            <input type="text" class="form-control" id="usuario" placeholder="Nome do seu usuario">
+                        </div>
+                        <div class="form-group">
+                            <label for="usuario">Escola*</label>
+                            <input required type="text" class="form-control" id="usuario" placeholder="Nome da sua escola">
+                        </div>
+                        <hr>-->
+                                <div class="form-group">
+                                    <label for="titulo">Nome*</label>
+                                    <input required type="text" class="form-control" id="titulo" placeholder="Digite o Título da mensagem">
+                                </div>
+                                <div class="form-group">
+                                    <label for="selectTipoDired">Dired que pertence a sua escola:</label>
+                                    <select name="tipoDired" class="form-control" id="selectTipoDired">
+                                        <option value="natal">Natal</option>
+                                        <option value="parnamirin">Parnamirin</option>
+                                        <option value="Nova Cruz">Nova Cruz</option>
+                                        <option value="São Paulo do Potengi">São Paulo do Potengi</option>
+                                        <option value="Ceará Mirim">Ceará Mirim</option>
+                                        <option value="Macau">Macau</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
+                                        <option value="Angicos">Angicos</option>
+                                        <option value="Currais Novos">Currais Novos</option>
+                                        <option value="Caicó">Caicó</option>
+                                        <option value="Assu">Assu</option>
+                                        <option value="Mossoró">Mossoró</option>
+                                        <option value="Apodí">Apodí</option>
+                                        <option value="Umarizal">Umarizal</option>
+                                        <option value="Pau dos Ferros">Pau dos Ferros</option>
+                                        <option value="João Câmara">João Câmara</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="selectTipoDired">Cidade:</label>
+                                    <select name="tipoDired" class="form-control" id="selectTipoDired">
+                                        <option value="natal">Natal</option>
+                                        <option value="parnamirin">Parnamirin</option>
+                                        <option value="Nova Cruz">Nova Cruz</option>
+                                        <option value="São Paulo do Potengi">São Paulo do Potengi</option>
+                                        <option value="Ceará Mirim">Ceará Mirim</option>
+                                        <option value="Macau">Macau</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
+                                        <option value="Angicos">Angicos</option>
+                                        <option value="Currais Novos">Currais Novos</option>
+                                        <option value="Caicó">Caicó</option>
+                                        <option value="Assu">Assu</option>
+                                        <option value="Mossoró">Mossoró</option>
+                                        <option value="Apodí">Apodí</option>
+                                        <option value="Umarizal">Umarizal</option>
+                                        <option value="Pau dos Ferros">Pau dos Ferros</option>
+                                        <option value="João Câmara">João Câmara</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="titulo">Data de Criação</label>
+                                    <input required type="date" class="form-control" id="titulo" placeholder="Digite o Título da mensagem">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descricao">Breve descrição</label>
+                                    <textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
+                                </div>
+                                <br>
+                                <button id="botaoLogin" type="submit" class="btn btn-success btn-block">Cadastrar</button>
+                                <hr>
+                            </form>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <!-- /#page-wrapper -->
+
+            </div>
+            <!-- /#wrapper -->
+
+            <!-- jQuery -->
+            <script src="/dashboard/vendor/jquery/jquery.min.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="/dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="/dashboard/vendor/metisMenu/metisMenu.min.js"></script>
+
+            <!-- Morris Charts JavaScript -->
+            <script src="/dashboard/vendor/raphael/raphael.min.js"></script>
+            <script src="/dashboard/vendor/morrisjs/morris.min.js"></script>
+            <script src="/dashboard/data/morris-data.js"></script>
+
+            <!-- Custom Theme JavaScript -->
+            <script src="/dashboard/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

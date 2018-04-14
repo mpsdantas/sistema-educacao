@@ -34,6 +34,9 @@
     <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script> 
     <script type='text/javascript'>
+
+        var titles = ['Escolas', 'Reclamações'];
+        var colors = ['']
     
       $.getJSON( "/js/geojson/rn.json", function( geojson ) {
 
@@ -56,7 +59,11 @@
                     }
                 },
                 colorAxis: {
-                    tickPixelInterval: 100
+                    min: 1,
+                    max: max,
+                    type: 'logarithmic',
+                    minColor: '#E6EBF5',
+                    maxColor: '#001FA1'
                 },
                 series: [{
                     data: data,
@@ -115,7 +122,6 @@
                     
                     <div id="chart_div" style="width: 700px; height: 500px;"></div>
 
-                
                     <!-- /.panel -->
                 </div>
 

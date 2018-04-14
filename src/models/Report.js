@@ -7,11 +7,13 @@ const reportSchema = new Schema({
     escola: String,
     titulo: String,
     assunto: String,
+    tipoDired:String,
     descricao: String,
     data: Date,
     statusReport: Boolean,
     dialogo:[{
-        msg: String
+        msg: String,
+        data:Date
     }]
 });
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Meu Perfil</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Configurações do meta para mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f8f9fa">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#f8f9fa">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+    <!--
+    <link rel="icon" href="imagens/favicon.png">
+-->
+    <!-- Bootstrap -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/estilo.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <% include ../components/usuario/navbar-user %>
+   <br>
+    <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <h4>Meu perfil</h4>
+                        <br>
+                        <div class="card">
+                            <div class="card-header">
+                                Dados 
+                                <a id="botaoEditar" href="/perfil/editar" class="btn btn-success float-right">Editar</a>
+                            </div>
+                            <div class="card-body"> 
+                                <p class="card-title"><b>Nome:</b> <%=nome%></p>
+                                <p class="card-text"><b>Email:</b> <%=email%></p>
+                                <p class="card-text"><b>Instituição:</b> <%=escola%></p>
+                                <p class="card-text"><b>Cidade da dired:</b> <%=tipoDired%> </p>
+                                <a id="botaoReports" href="/report/listar" class="btn btn-success">Últimos Reports</a>
+                            </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <% include ../components/footer %>
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="/bootstrap/js/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#form-login').submit(function (event) {
+                        event.preventDefault();
+                        var usuario = $('#usuario').val();
+                        var escola = $('#escola').val();
+                        var assunto = $('#assunto').val();
+                        var titulo = $('#titulo').val();
+                        var descricao = $('#descricao').val();
+                        $.ajax({
+                            url: '/realizar-report',
+                            type: 'post',
+                            data: {
+                                email,
+                                senha
+                            },
+                            success: function (data) {
+                                alert('enviado');
+                            }
+                        });
+                    });
+                });
+            </script>
+</body>
+
+</html>
