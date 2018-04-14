@@ -40,6 +40,10 @@ module.exports = application => {
     res.render("perfil/editar", { nome: req.session.nome });
   });
 
+  application.get("/sobre", (req, res) => {
+    res.render("components/sobre");
+  });
+
   application.get(
     "/perfil/alterar-senha",
     blockRouter.statusUser,
