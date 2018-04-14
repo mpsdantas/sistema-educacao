@@ -7,9 +7,9 @@ module.exports = application => {
         res.render('report/form',{nome:req.session.nome});
     });
 
-    application.get('/report/visualizar', blockRouter.statusUser, (req,res) => {
+    /*application.get('/report/visualizar', blockRouter.statusUser, (req,res) => {
         res.render('report/visualizar',{nome:req.session.nome});
-    });
+    });*/
     
     application.get('/admin', blockRouter.statusAdmin, (req, res) => { 
 
