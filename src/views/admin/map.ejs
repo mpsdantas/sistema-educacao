@@ -33,73 +33,6 @@
     <script src="https://code.highcharts.com/maps/modules/data.js"></script>
     <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script> 
-    <script type='text/javascript'>
-
-        var titles = ['Escolas', 'Reclamações'];
-        var colors = ['']
-    
-      $.getJSON( "/js/geojson/rn.json", function( geojson ) {
-
-          var data = [
-            ['240010', 728],
-            ];
-          // Initiate the chart
-            Highcharts.mapChart('chart_div', {
-                chart: {
-                    map: geojson
-                },
-
-                title: {
-                    text: 'Escolas'
-                },
-                mapNavigation: {
-                    enabled: true,
-                    buttonOptions: {
-                        verticalAlign: 'bottom'
-                    }
-                },
-                colorAxis: {
-                    min: 1,
-                    max: max,
-                    type: 'logarithmic',
-                    minColor: '#E6EBF5',
-                    maxColor: '#001FA1'
-                },
-                series: [{
-                    data: data,
-                    keys: ['id', 'value'],
-                    joinBy: 'id',
-                    name: 'Escolas',
-                }]
-            });
-        });
-
-        Highcharts.setOptions({
-            lang: {
-                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                shortMonths: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-                loading: ['Atualizando o gráfico...aguarde'],
-                contextButtonTitle: 'Exportar gráfico',
-                decimalPoint: ',',
-                thousandsSep: '.',
-                downloadJPEG: 'Baixar imagem JPEG',
-                downloadPDF: 'Baixar arquivo PDF',
-                downloadPNG: 'Baixar imagem PNG',
-                downloadSVG: 'Baixar vetor SVG',
-                printChart: 'Imprimir gráfico',
-                rangeSelectorFrom: 'De',
-                rangeSelectorTo: 'Para',
-                rangeSelectorZoom: 'Zoom',
-                resetZoom: 'Limpar Zoom',
-                resetZoomTitle: 'Voltar Zoom para nível 1:1',
-            }
-        });
-      
-      GeoJSON.parse(jsonData, {Point: ['lat', 'lng']});
-    
-    </script>
-
 
 </head>
 
@@ -153,7 +86,7 @@
                             <td>Joe</td>
                         </tr>
                         </tbody>
-  </table>
+                    </table>
                 
                     <!-- /.panel -->
                 </div>
@@ -181,6 +114,94 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/dashboard/dist/js/sb-admin-2.js"></script>
+
+    <script type="text/javascript">
+
+        var chart = [];
+
+        $.getJSON( "/js/geojson/rn.json", function( geojson ) {
+
+            var data = [
+              ['240010', 728],
+            ];
+
+            var max = 1;
+            for(i = 0; i < data.length; ++i){
+                if(data[i][1] > max){
+                    max = parseInt(data[i][1]);
+                }
+            }
+            console.log(max)
+            // Initiate the chart
+            chart = Highcharts.mapChart('chart_div', {
+                chart: {
+                    map: geojson
+                },
+
+                title: {
+                    text: 'Escolas'
+                },
+                mapNavigation: {
+                    enabled: true,
+                    buttonOptions: {
+                        verticalAlign: 'bottom'
+                    }
+                },
+                colorAxis: {
+                    min: 1,
+                    max: max,
+                    type: 'logarithmic',
+                    minColor: '#E6EBF5',
+                    maxColor: '#001FA1'
+                },
+                series: [{
+                    data: data,
+                    keys: ['id', 'value'],
+                    joinBy: 'id',
+                    name: 'Escolas',
+                }]
+            });
+        });
+
+        Highcharts.setOptions({
+            lang: {
+                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                shortMonths: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                loading: ['Atualizando o gráfico...aguarde'],
+                contextButtonTitle: 'Exportar gráfico',
+                decimalPoint: ',',
+                thousandsSep: '.',
+                downloadJPEG: 'Baixar imagem JPEG',
+                downloadPDF: 'Baixar arquivo PDF',
+                downloadPNG: 'Baixar imagem PNG',
+                downloadSVG: 'Baixar vetor SVG',
+                printChart: 'Imprimir gráfico',
+                rangeSelectorFrom: 'De',
+                rangeSelectorTo: 'Para',
+                rangeSelectorZoom: 'Zoom',
+                resetZoom: 'Limpar Zoom',
+                resetZoomTitle: 'Voltar Zoom para nível 1:1',
+            }
+        });
+    
+        var i = 1;
+        var titles = ['Escolas', 'Reclamações'];
+        var colors = ['#001FA1', '#D43A15']
+        $('#mapa_select').change( function(){
+            chart.update({
+                colorAxis: {
+                    maxColor: colors[i]
+                },
+                series: [{
+                    name: titles[i],
+                }]
+            });
+
+            i = 1 - i;
+        });
+    
+    </script>
 
 </body>
 
