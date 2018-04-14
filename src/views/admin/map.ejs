@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin - Sistema de envio de informações Dired</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/dashboard/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/dashboard/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/dashboard/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/dashboard/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/geojson/0.5.0/geojson.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script> 
+    <script type='text/javascript'>
+    
+      $.getJSON( "/js/geojson/rn.json", function( geojson ) {
+
+          var data = [
+            ['240010', 728],
+            ];
+          // Initiate the chart
+            Highcharts.mapChart('chart_div', {
+                chart: {
+                    map: geojson
+                },
+
+                title: {
+                    text: 'Escolas'
+                },
+                mapNavigation: {
+                    enabled: true,
+                    buttonOptions: {
+                        verticalAlign: 'bottom'
+                    }
+                },
+                colorAxis: {
+                    tickPixelInterval: 100
+                },
+                series: [{
+                    data: data,
+                    keys: ['id', 'value'],
+                    joinBy: 'id',
+                    name: 'Escolas',
+                }]
+            });
+        });
+
+        Highcharts.setOptions({
+            lang: {
+                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                shortMonths: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                loading: ['Atualizando o gráfico...aguarde'],
+                contextButtonTitle: 'Exportar gráfico',
+                decimalPoint: ',',
+                thousandsSep: '.',
+                downloadJPEG: 'Baixar imagem JPEG',
+                downloadPDF: 'Baixar arquivo PDF',
+                downloadPNG: 'Baixar imagem PNG',
+                downloadSVG: 'Baixar vetor SVG',
+                printChart: 'Imprimir gráfico',
+                rangeSelectorFrom: 'De',
+                rangeSelectorTo: 'Para',
+                rangeSelectorZoom: 'Zoom',
+                resetZoom: 'Limpar Zoom',
+                resetZoomTitle: 'Voltar Zoom para nível 1:1',
+            }
+        });
+      
+      GeoJSON.parse(jsonData, {Point: ['lat', 'lng']});
+    
+    </script>
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+    	<% include ../components/admin/navbar-admin %>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Mapa</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    
+                    <div id="chart_div" style="width: 700px; height: 500px;"></div>
+
+                
+                    <!-- /.panel -->
+                </div>
+
+                <div class="col-lg-4">
+
+                    <form class="form-inline">
+                        <label class="mr-sm-2" for="mapa_form">Selecione: </label>
+                        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="mapa_select">
+                            <option value="escolas" selected>Escolas</option>
+                            <option value="reclamacoes">Reclamações</option>
+                        </select>
+                    </form>
+                    <br>
+                    <!-- Aqui listar os municípios ordenados pelas quantidade de escolas ou de reclamções-->
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Município</th>
+                            <th>Quantidade</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Default</td>
+                            <td>Defaultson</td>
+                        </tr>      
+                        <tr class="table-primary">
+                            <td>Primary</td>
+                            <td>Joe</td>
+                        </tr>
+                        </tbody>
+  </table>
+                
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/dashboard/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/dashboard/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Graph JavaScript -->
+
+    <!-- Morris Charts JavaScript -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/dashboard/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
