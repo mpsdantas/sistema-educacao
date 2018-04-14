@@ -16,6 +16,7 @@ module.exports = application => {
       res.render('admin/stats')
   });
 
+  application.get('/admin/maps', blockRouter.statusAdmin, (req,res) => {res.render('admin/map')});
 
   application.get("/admin/escolas", blockRouter.statusAdmin, (req, res) => {
     res.render("admin/escola/listar");

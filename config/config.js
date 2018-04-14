@@ -38,6 +38,8 @@ app.use(bodyParser.json());
 //  Configurando o middleware do express-validator.
 app.use(expressValidator());
 
+var GeoJSON = require('geojson')
+
 //  Extraindo variaveis de ambiente.
 env.config({ path: 'variables.env' });
 
