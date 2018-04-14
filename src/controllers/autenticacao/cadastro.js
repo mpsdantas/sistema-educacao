@@ -31,6 +31,19 @@ exports.realizarCadastroUsuario = async (application, req, res) => {
         return;
     }
 };
+exports.atualizarPerfil = async (application, req, res) => {
+    req.assert('nome', 'O seu nome não pode ser vazio').notEmpty();
+    req.assert('tipoUsuario', 'O tipo de usuario não pode ser vazio').notEmpty();
+    req.assert('tipoDired', 'O tipo dired não pode ser vazio.').notEmpty();
+    req.assert('escola', 'A escola não pode ser vazia.').notEmpty();
+}
+
+exports.atualizarSenha = async (application, req, res) => {
+    req.assert('senha', 'A senha não pode ser vazia.').notEmpty();
+    req.assert('repetirSenha', 'O campo repetir senha não pode ser vazio.').notEmpty();
+    req.assert('senha', 'As senhas não são iguais').equals(req.body.repetirSenha);
+}
+
 exports.realizarLogin = async (application, req, res) => {
     req.assert('email', 'O seu e-mail não pode ser vazio.').notEmpty();
     req.assert('senha', 'A senha não pode ser vazia.').notEmpty();
