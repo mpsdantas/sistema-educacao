@@ -126,7 +126,6 @@ body {
     z-index: 1;
     position: absolute;
     width: 250px;
-    margin-top: 55px;
   }
   .navbar-top-links .dropdown-messages,
   .navbar-top-links .dropdown-tasks,

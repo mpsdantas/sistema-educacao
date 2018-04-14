@@ -46,7 +46,7 @@
 					<hr>
 					<h3>Repostas: (
 						<%=reportIndividual.dialogo.length-1%>)</h3>
-					<%for(let i=reportIndividual.dialogo.length-1; i>=1;i--){%>
+					<%for(let i=1; i<reportIndividual.dialogo.length; i++){%>
 						<div class="card <%=reportIndividual.dialogo[i].enviadoPor==reportIndividual.nome?'bg-light':'bg-green'%>">
 							<div class="card-body">
 								<p class="card-text">
