@@ -54,8 +54,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Assunto</th>
-                                                        <th>Data de Envio</th>
                                                         <th>Título</th>
+                                                        <th>Data de Envio</th>
                                                         <th>Respondido?</th>
                                                     </tr>
                                                 </thead>
@@ -64,13 +64,14 @@
                                                         <tr>
                                                             <td>
                                                                 <a href="/ver-reports-admin/<%=reports[i]._id%>">
-                                                                    <%=reports[i].assunto%>
+                                                                    <%=reports[i].titulo%>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <%=reports[i].assunto%>
                                                             </td>
                                                             <td>
                                                                 <%=reports[i].data.toLocaleDateString('pt-BR')%>
-                                                            </td>
-                                                            <td>
-                                                                <%=reports[i].titulo%>
                                                             </td>
                                                             <td>
                                                                 <%=(reports[i].dialogo.length>1)?'Sim':'Não'%>

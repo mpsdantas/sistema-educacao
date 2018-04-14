@@ -45,9 +45,9 @@ exports.exibirDashboard = async (application, req, res) =>{
     let mesC = d.getMonth();
     let dataInicio = new Date(anoC, mesC, 1);
     let dataFim = new Date(anoC, mesC + 1, 0);
-    const reportsEsseMes = await Report.find({ data: { $gt: dataInicio, $lt: dataFim } });
-    const reportsAbertos = await Report.find({statusReport:false,tipoDired:req.session.tipoDired});
-    const reportsFechados = await Report.find({ statusReport: true, tipoDired: req.session.tipoDired });
+    const reportsEsseMes = await Report.find({data: { $gt: dataInicio, $lt: dataFim } });
+    const reportsAbertos = await Report.find({$where: "this.dialogo.length == 1"});//tipoDired:req.session.tipoDired});
+    const reportsFechados = await Report.find({$where: "this.dialogo.length > 1"});//, tipoDired: req.session.tipoDired });
     const reportsTotal = await Report.find({});
     const reportsReclamacoes = await Report.find({ assunto:"reclamação"});
     res.render('admin/dashboard', { reportsAbertos, reportsTotal, reportsReclamacoes, reportsFechados, reportsEsseMes});
@@ -72,7 +72,7 @@ exports.respostaReportIndividual = async (application, req, res) => {
     const enviarEmail = {
         from: 'naoresponder@bapp.com',
         to: email, // Quem receberá
-        subject: 'Resposta da secretaria de educação',  // Um assunto bacana :-) 
+        subject: 'Resposta da secretaria de educação',  // Um assunto bacana :-)
         html: "A secretaria de educação respondeu a sua questão, entre no sistema agora e confira." // O conteúdo do e-mail
     };
     transporte.sendMail(enviarEmail, function (err, info) {
