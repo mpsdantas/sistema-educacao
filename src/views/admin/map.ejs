@@ -134,6 +134,15 @@
             ['240610', 6]
         ]
 
+        var data = $.ajax({
+            url: "/js/geojson/dados.json",
+            dataType: "json",
+            async: false
+            }).responseText;
+
+        data = JSON.parse(data)
+        
+
         $.getJSON( "/js/geojson/rn.json", function( geojson ) {
 
             var max = 1;
@@ -157,19 +166,12 @@
                         verticalAlign: 'bottom'
                     }
                 },
-                colorAxis: {
-                    min: 1,
-                    max: max,
-                    type: 'logarithmic',
-                    minColor: '#E6EBF5',
-                    maxColor: '#001FA1'
-                },
                 series: [{
                     data: data,
                     keys: ['id', 'value'],
-                    joinBy: 'id',
                     name: 'Escolas',
-                }]
+                    joinBy: 'id',
+                },]
             });
         });
 
@@ -203,16 +205,17 @@
             console.log('change');
             console.log(titles[index]);
 
+            var shallowData = data.slice(0, data.length);
+
             if($(this).val() === 'reclamacoes'){
                 var shallowDataR = dataR.slice(0, dataR.length);
                 var shallowDataS = dataS.slice(0, dataS.length);
-                var s = chart.series[0].setData(shallowDataR);
-                //var s = chart.series[1].setData(shallowDataS);
-                console.log(shallowDataR)
-                console.log(dataR)
-            } else {
-                var s = chart.series[0].setData(data);
+                chart.series[0].setData(shallowDataR);
+                chart.series[1].setData(shallowDataS);
+                var s = chart.series[1].setData(shallowDataS);
                 console.log(data)
+            } else {
+                var s = chart.series[0].setData(shallowData);
             }
 
             chart.update({
@@ -220,9 +223,12 @@
                     text: titles[index]
                 }, 
                 series: {
+                    name: titles[index],
                     data: s
                 }
             });
+
+            
             
 
             index = 1 - index;
