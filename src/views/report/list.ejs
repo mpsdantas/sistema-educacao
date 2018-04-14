@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Report - Sistema de envio de informações Dired</title>
 	<meta charset="utf-8">
@@ -14,67 +15,82 @@
 	<!--
 	<link rel="icon" href="imagens/favicon.png">
 -->
-<!-- Bootstrap -->
-<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/estilo.css" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/estilo.css" rel="stylesheet">
 </head>
+
 <body>
 	<% include ../components/usuario/navbar-user %>
-	<br>
-	<div class="container">
-		<%if(reports.length>0){%>
-			<%for(let i=0;i<reports.length;i++){%>
-				<div class="row">
-					<div class="col-md-8 offset-md-2">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title"><%=reports[i].titulo%></h5>
-								<p class="card-text"><%=reports[i].descricao%></p>
-								<a href="/ver-reports/<%=reports[i]._id%>" class="btn btn-primary">Ver detalhes</a>
-							</div>
-						</div>
-						<br>
-					</div>	
-				</div>
-			<%}%>
-		<%}else{%>
+		<br>
+		<div class="container">
 			<div class="row">
 				<div class="col-md-8 offset-md-2">
-					<p>Não existem reports</p>
+					<h3>Todos os seus reports</h3>
+					<%if(reports.length>0){%>
+						<%for(let i=0;i<reports.length;i++){%>
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">
+										<%=reports[i].titulo%>
+									</h5>
+									<p class="card-text">
+										<%=reports[i].descricao%>
+									</p>
+									<a href="/ver-reports/<%=reports[i]._id%>" class="btn btn-primary">Ver detalhes</a>
+								</div>
+							</div>
+							<br>
+							<%}%>
+								<%}else{%>
+									<div class="row">
+										<div class="col-md-8 offset-md-2">
+											<p>Não existem reports</p>
+										</div>
+									</div>
+									<%}%>
+										<a href="" type="button" class="btn btn-success btn-block">Enviar novo Report</a>
 				</div>
 			</div>
-		<%}%>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	</div>
-	<% include ../components/footer %>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="/bootstrap/js/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#form-login').submit(function(event) {
-				event.preventDefault();
-				var usuario = $('#usuario').val();
-				var escola = $('#escola').val();
-				var assunto = $('#assunto').val();
-				var titulo = $('#titulo').val();
-				var descricao = $('#descricao').val();
-				$.ajax({
-                    url:'/realizar-report',
-                    type:'post',
-                    data : {
-                        email,
-                        senha
-                    },
-                    success : function(data){
-                        alert('enviado');
-                    }
-                });
-			});
-		});
-	</script>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>
+		<% include ../components/footer %>
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+			<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			 crossorigin="anonymous"></script>
+			<!-- Include all compiled plugins (below), or include individual files as needed -->
+			<script src="/bootstrap/js/bootstrap.min.js"></script>
+			<script>
+				$(document).ready(function () {
+					$('#form-login').submit(function (event) {
+						event.preventDefault();
+						var usuario = $('#usuario').val();
+						var escola = $('#escola').val();
+						var assunto = $('#assunto').val();
+						var titulo = $('#titulo').val();
+						var descricao = $('#descricao').val();
+						$.ajax({
+							url: '/realizar-report',
+							type: 'post',
+							data: {
+								email,
+								senha
+							},
+							success: function (data) {
+								alert('enviado');
+							}
+						});
+					});
+				});
+			</script>
 </body>
+
 </html>
