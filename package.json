@@ -27,7 +27,8 @@
     "express-validator": "^5.1.2",
     "geojson": "^0.5.0",
     "highcharts": "^6.1.0",
-    "mongoose": "^5.0.14"
+    "mongoose": "^5.0.14",
+    "nodemailer": "^4.6.4"
   },
   "devDependencies": {
     "cz-ptbr-changelog": "^1.0.1",

@@ -12,7 +12,10 @@ module.exports = application => {
     application.get('/ver-reports/:id', blockRouter.statusUser, (req, res) => {
         report.exibirReportIndividual(application, req, res);
     });
-    application.post('/enviar-respost-report', blockRouter.statusUser, (req, res) => {
+    application.get('/ver-reports-admin/:id', blockRouter.statusAdmin, (req, res) => {
+        report.exibirReportIndividualAdmin(application, req, res);
+    });
+    application.post('/enviar-respost-report', (req, res) => {
         report.respostaReportIndividual(application, req, res);
     });
 };
