@@ -15,6 +15,7 @@ module.exports = application => {
       res.render('admin/stats')
   });
 
+  application.get('/admin/maps', blockRouter.statusAdmin, (req,res) => {res.render('admin/map')});
 
   application.get("/admin/escolas", blockRouter.statusAdmin, (req, res) => {
     res.render("admin/escola/listar");
@@ -38,4 +39,12 @@ module.exports = application => {
   application.get("/perfil/editar", blockRouter.statusUser, (req, res) => {
     res.render("perfil/editar", { nome: req.session.nome });
   });
+
+  application.get(
+    "/perfil/alterar-senha",
+    blockRouter.statusUser,
+    (req, res) => {
+      res.render("perfil/alterar-senha", { nome: req.session.nome });
+    }
+  );
 };
