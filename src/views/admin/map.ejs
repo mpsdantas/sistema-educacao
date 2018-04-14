@@ -65,6 +65,7 @@
                         <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="mapa_select">
                             <option value="escolas" selected>Escolas</option>
                             <option value="reclamacoes">Reclamações</option>
+                            <option value="sugestoes">Sugestões</option>
                         </select>
                     </form>
                     <br>
@@ -119,18 +120,24 @@
 
         var chart = [];
 
+        var data = $.ajax({
+            url: "/js/geojson/dados.json",
+            dataType: "json",
+            async: false
+            }).responseText;
+
+        data = JSON.parse(data)
+        
+
         $.getJSON( "/js/geojson/rn.json", function( geojson ) {
 
-            var data = [
-              ['240010', 728],
-            ];
-
             var max = 1;
-            for(i = 0; i < data.length; ++i){
-                if(data[i][1] > max){
-                    max = parseInt(data[i][1]);
+            for(i = 0; i < data[0].length; ++i){
+                if(data[0][i][1] > max){
+                    max = parseInt(data[0][i][1]);
                 }
             }
+
             // Initiate the chart
             chart = Highcharts.mapChart('chart_div', {
                 chart: {
@@ -145,19 +152,33 @@
                     buttonOptions: {
                         verticalAlign: 'bottom'
                     }
+                },colorAxis: {
+                    dataClasses: [{
+                        from: 1,
+                        to: max/3,
+                        color: '#9DA0FF',
+                    }, {
+                        from: max/3,
+                        to: 2*max/3,
+                        color: '#4D5ED4',
+                    }, {
+                        from: 2*max/3,
+                        to: max,
+                        color: '#272F6B',
+                    }]
                 },
-                colorAxis: {
-                    min: 1,
-                    max: max,
-                    type: 'logarithmic',
-                    minColor: '#E6EBF5',
-                    maxColor: '#001FA1'
+                plotOptions: {
+                    map: {
+                        allAreas: false,
+                    }
                 },
                 series: [{
-                    data: data,
+                    data: data[0],
                     keys: ['id', 'value'],
-                    joinBy: 'id',
                     name: 'Escolas',
+                    joinBy: 'id',
+                },{
+                    data:null
                 }]
             });
         });
@@ -184,23 +205,79 @@
             }
         });
     
-        var i = 1;
-        var titles = ['Escolas', 'Reclamações'];
-        var colors = ['#001FA1', '#D43A15']
-        $('#mapa_select').change( function(){
+        
+        var titles = ['Escolas', 'Reclamações', 'Sugestões'];
+        var colors = [
+            ['#9DA0FF','#4D5ED4', '#272F6B'], 
+            ['#FE594F', '#E81B2B', '#BD1613'],
+            ['#90FF49', '#52912A', '#233D01']
+            ];
+        var index = 0;
+        $('#mapa_select').change(function(e){
+
+            var shallowData = data.slice(0, data[0].length);
+
+            if($(this).val() === 'reclamacoes'){
+                var shallowDataR = data[1].slice(0, data[1].length);
+                chart.series[0].setData(shallowDataR);
+
+                var max = 1;
+                for(i = 0; i < data[1].length; ++i){
+                    if(data[1][i][1] > max){
+                        max = parseInt(data[1][i][1]);
+                    }
+                }
+
+                index = 1;
+            } else if ($(this).val() === 'sugestoes'){
+                var shallowDataS = data[2].slice(0, data[2].length);
+                chart.series[0].setData(shallowDataS);
+
+                var max = 1;
+                for(i = 0; i < data[2].length; ++i){
+                    if(data[2][i][1] > max){
+                        max = parseInt(data[2][i][1]);
+                    }
+                }
+
+                index = 2;
+            } else {
+                chart.series[0].setData(data[0]);
+
+                var max = 1;
+                for(i = 0; i < data[0].length; ++i){
+                    console.log(data[0][i])
+                    if(data[0][i].value > max){
+                        max = parseInt(data[0][i].value);
+                    }
+                }
+                index = 0;
+            }
+
             chart.update({
                 title: {
-                    text: titles[i]
-                },
-                colorAxis: {
-                    maxColor: colors[i]
-                },
-                series: [{
-                    name: titles[i],
-                }]
+                    text: titles[index]
+                }, 
+                series: {
+                    name: titles[index],
+                }, colorAxis: {
+                    dataClasses: [{
+                        from: 1,
+                        to: max/3,
+                        color: colors[index][0],
+                    }, {
+                        from: max/3,
+                        to: 2*max/3,
+                        color: colors[index][1],
+                    }, {
+                        from: 2*max/3,
+                        to: max,
+                        color: colors[index][2],
+                    }]
+                }
             });
 
-            i = 1 - i;
+        
         });
     
     </script>
