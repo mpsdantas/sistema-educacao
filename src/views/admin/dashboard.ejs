@@ -162,7 +162,8 @@
                                             <table class="table table-bordered table-hover table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Nome</th>
+                                                        <th>Título</th>
+                                                        <th>Tipo</th>
                                                         <th>Data de Cadastro</th>
                                                         <th>Escola</th>
                                                         <th>Respondido?</th>
@@ -172,9 +173,14 @@
                                                     <%for(let i =0; i<reportsTotal.length;i++){%>
                                                         <tr>
                                                             <td>
-                                                                <%=reportsTotal[i].nome%>
+                                                                <a href="/ver-reports-admin/<%=reportsTotal[i]._id%>">
+                                                                    <%=reportsTotal[i].titulo%>
+                                                                </a>
                                                             </td>
-                                                            <td>13/04/2018</td>
+                                                            <td>
+                                                                <%=reportsTotal[i].assunto%>
+                                                            </td>
+                                                            <td><%=reportsTotal[i].data.toLocaleDateString('pt-BR')%></td>
                                                             <td>
                                                                 <%=reportsTotal[i].escola%>
                                                             </td>
