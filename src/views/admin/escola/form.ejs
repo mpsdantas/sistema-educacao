@@ -59,7 +59,11 @@
                         <hr>-->
                                 <div class="form-group">
                                     <label for="titulo">Nome*</label>
-                                    <input required type="text" class="form-control" id="titulo" placeholder="Digite o Título da mensagem">
+                                    <input required type="text" class="form-control" id="nome" placeholder="Digite o nome da escola">
+                                </div>
+                                <div class="form-group">
+                                    <label for="titulo">Cidade*</label>
+                                    <input required type="text" class="form-control" id="cidade" placeholder="Digite o nome da escola">
                                 </div>
                                 <div class="form-group">
                                     <label for="selectTipoDired">Dired que pertence a sua escola:</label>
@@ -83,29 +87,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="selectTipoDired">Cidade:</label>
-                                    <select name="tipoDired" class="form-control" id="selectTipoDired">
-                                        <option value="natal">Natal</option>
-                                        <option value="parnamirin">Parnamirin</option>
-                                        <option value="Nova Cruz">Nova Cruz</option>
-                                        <option value="São Paulo do Potengi">São Paulo do Potengi</option>
-                                        <option value="Ceará Mirim">Ceará Mirim</option>
-                                        <option value="Macau">Macau</option>
-                                        <option value="Santa Cruz">Santa Cruz</option>
-                                        <option value="Angicos">Angicos</option>
-                                        <option value="Currais Novos">Currais Novos</option>
-                                        <option value="Caicó">Caicó</option>
-                                        <option value="Assu">Assu</option>
-                                        <option value="Mossoró">Mossoró</option>
-                                        <option value="Apodí">Apodí</option>
-                                        <option value="Umarizal">Umarizal</option>
-                                        <option value="Pau dos Ferros">Pau dos Ferros</option>
-                                        <option value="João Câmara">João Câmara</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label for="titulo">Data de Criação</label>
-                                    <input required type="date" class="form-control" id="titulo" placeholder="Digite o Título da mensagem">
+                                    <input required type="date" class="form-control" id="data">
                                 </div>
                                 <div class="form-group">
                                     <label for="descricao">Breve descrição</label>
@@ -144,6 +127,48 @@
 
             <!-- Custom Theme JavaScript -->
             <script src="/dashboard/dist/js/sb-admin-2.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#form-login').submit(function(event) {
+                        event.preventDefault();
+                        let nome = $('#nome').val();
+                        let tipoDired = $('select[name=tipoDired]').val();
+                        let cidade = $('#cidade').val();
+                        let dataCriacao = new Date($('#data').val());
+                        let descricao = $('#descricao').val();
+                        const dados = {
+                            nome,
+                            tipoDired,
+                            cidade,
+                            dataCriacao,
+                            descricao
+                        }
+                        if(nome==="" || cidade===""){
+                            alert('Existem erros no formulário');
+                            return;
+                        }
+                        $.ajax({
+                            url:'/cadastrar-escola',
+                            type:'post',
+                            data : {
+                                nome,
+                                tipoDired,
+                                cidade,
+                                dataCriacao,
+                                descricao
+                            },
+                            success : function(data){
+                                if(data.status){
+                                    alert('Escola salva com sucesso');
+                                    window.location.href = "/admin/escolas/form";
+                                }else{
+                                    alert('Erro ao salvar escola');
+                                }
+                            }
+                        });
+                    });
+                });
+            </script>
 
 </body>
 
