@@ -1,5 +1,6 @@
 const blockRouter = require("../controllers/blockRouter/index.js");
 const report = require("../controllers/report/index");
+const escolas = require('../controllers/escolas');
 module.exports = application => {
   application.get('/', (req,res) => {res.render('index')});
 
@@ -18,7 +19,7 @@ module.exports = application => {
   application.get('/admin/maps', blockRouter.statusAdmin, (req,res) => {res.render('admin/map')});
 
   application.get("/admin/escolas", blockRouter.statusAdmin, (req, res) => {
-    res.render("admin/escola/listar");
+    escolas.renderTodasEscolas(application, req, res);
   });
   application.get(
     "/admin/escolas/form",
@@ -51,4 +52,8 @@ module.exports = application => {
       res.render("perfil/alterar-senha", { nome: req.session.nome });
     }
   );
+
+  application.post('/cadastrar-escola',(req,res)=>{
+    escolas.salvarEscola(application, req, res);
+  });
 };
