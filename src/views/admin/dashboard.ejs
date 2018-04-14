@@ -159,7 +159,7 @@
                                                         <td>13/04/2018</td>
                                                         <td><%=reportsTotal[i].escola%></td>
                                                         <td>
-                                                        <%if(!reportsTotal[i].statusReport){%>
+                                                        <%if(reportsTotal[i].dialogo.length==1){%>
                                                             Não
                                                         <%}else{%>
                                                             Sim

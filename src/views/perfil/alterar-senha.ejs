@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Perfil</title>
+	<title>Alterar Senha</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -19,7 +19,7 @@
 <link href="/css/estilo.css" rel="stylesheet">
 </head>
 <body>
-	<% include ../components/usuario/navbar-user %>
+	 <% include ../components/usuario/navbar-user %>
 	<br>
 	<br>
 	<section class="conteudo-principal">
@@ -28,36 +28,15 @@
                 <div class="col-md-6 offset-md-3 col-10 offset-1">
 					<div id="status"></div>
                     <form id="form-cadastro">
-                        <div class="form-group">
-                            <label for="nome">Nome:</label>
-                            <input type="text" class="form-control" id="nome" placeholder="Insira seu email aqui.">
+						<div class="form-group">
+                            <label for="senha">Senha:</label>
+                            <input type="password" class="form-control" id="senha" placeholder="Insira sua senha aqui.">
                         </div>
 						<div class="form-group">
-                            <label for="escola">Escola:</label>
-                            <input type="text" class="form-control" id="escola" placeholder="Insira o nome da sua escola.">
+                            <label for="repetir-senha">Repetir senha:</label>
+                            <input type="password" class="form-control" id="repetir-senha" placeholder="Repita sua aqui.">
                         </div>
-						<div class="form-group">
-							<label for="selectTipoDired">Dired que pertence a sua escola:</label>
-							<select name="tipoDired" class="form-control" id="selectTipoDired">
-								<option value="natal">Natal</option>
-								<option value="parnamirin">Parnamirin</option>
-								<option value="Nova Cruz">Nova Cruz</option>
-								<option value="São Paulo do Potengi">São Paulo do Potengi</option>
-								<option value="Ceará Mirim">Ceará Mirim</option>
-								<option value="Macau">Macau</option>
-								<option value="Santa Cruz">Santa Cruz</option>
-								<option value="Angicos">Angicos</option>
-								<option value="Currais Novos">Currais Novos</option>
-								<option value="Caicó">Caicó</option>
-								<option value="Assu">Assu</option>
-								<option value="Mossoró">Mossoró</option>
-								<option value="Apodí">Apodí</option>
-								<option value="Umarizal">Umarizal</option>
-								<option value="Pau dos Ferros">Pau dos Ferros</option>
-								<option value="João Câmara">João Câmara</option>
-							</select>
-						</div>
-						<button type="submit" class="btn btn-block btn-success">Atualizar dados</button>
+						<button type="submit" class="btn btn-block btn-success">Atualizar</button>
                     </form>
 					<br><br>
                 </div>
@@ -75,20 +54,20 @@
 		$(document).ready(function() {
 			$('#form-cadastro').submit(function(event) {
 				event.preventDefault();
-				let nome = $('#nome').val();
-				let tipoUsuario = $('select[name=tipoUsuario]').val();
-				let tipoDired = $('select[name=tipoDired]').val();
-				let escola = $('#escola').val();
-				let arrayErrors = new Array(6);
+				let senha = $('#senha').val();
+				let repetirSenha = $('#repetir-senha').val();
+				let arrayErrors = new Array(2);
 
 				// CONTROLE DE ERROS FRONT END //
-				if(nome==""){
-					arrayErrors[0] = "O nome é um campo obrigatório.";
+				if(senha==""){
+					arrayErrors[0] = "A senha é um campo obrigatório.";
 				}
-				if(escola==""){
-					arrayErrors[1] = "A escola é um campo obrigatório.";
+				if(repetirSenha==""){
+					arrayErrors[1] = "Por favor repita a senha.";
 				}
-
+				if(senha!==repetirSenha){
+					arrayErrors[2] = "As senhas não são iguais";
+				}
 				// CONTROLE DE ERROS FRONT END //
 
 				var cont = 0;
@@ -114,6 +93,7 @@
 						</button>
 						${arrayExibir[0]}<br>
 						${arrayExibir[1]}<br>
+						${arrayExibir[2]}<br>
 					</div>`;
 					$('#status').append(htmlAppend);
 					return;
@@ -125,11 +105,6 @@
 					url:'/cadastro-usuario',
 					type:'post',
 					data : {
-						nome,
-						email,
-						tipoUsuario,
-						tipoDired,
-						escola,
 						senha,
 						repetirSenha
 					},
@@ -156,7 +131,7 @@
 									senha
                                 },
                                 success : function(data){
-										if(data.status.tipo=="Servidor"){
+									if(data.status.tipo=="Servidor"){
 										window.location.href = '/admin';
 									}else{
 										window.location.href = '/report';
