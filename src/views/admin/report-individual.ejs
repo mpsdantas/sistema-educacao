@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin - Sistema de envio de informações Dired</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/dashboard/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/dashboard/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="/dashboard/vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/dashboard/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+    	<% include ../components/admin/navbar-admin %>
+
+        <div id="page-wrapper">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="row">
+                        <h4>Detalhes sobre o Report</h4>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <b>Título:</b> <%=reportIndividual.titulo%></h5>
+                                <p class="card-text">
+                                    <b>Descrição:</b><%=reportIndividual.descricao%></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Repostas: (<%=reportIndividual.dialogo.length-1%>)</h5>
+                        <%for(let i=reportIndividual.dialogo.length-1; i>=1;i--){%>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <b>Resposta:</b> <%=reportIndividual.dialogo[i].msg%></p>
+                                    <p class="pull-right text-muted small">Enviado por 
+                                    <%=reportIndividual.dialogo[i].enviadoPor%> em  
+                                    <%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                            <br>
+                        <%}%>
+                        <br>
+                        <hr>
+                        <form id="form-login">
+                            <div class="form-group">
+                                <label for="descricao">
+                                    <h5>Responder ao Report:</h5>
+                                </label>
+                                <textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
+                            </div>
+                            <button id="botaoLogin" type="submit" class="btn btn-success">Enviar</button>
+                            <hr>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="/dashboard/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/dashboard/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="/dashboard/vendor/raphael/raphael.min.js"></script>
+    <script src="/dashboard/vendor/morrisjs/morris.min.js"></script>
+    <script src="/dashboard/data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/dashboard/dist/js/sb-admin-2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#form-login').submit(function (event) {
+                event.preventDefault();
+                let descricao = $('#descricao').val();
+                let id = `<%=reportIndividual._id%>`;
+                if(descricao==""){
+                    alert('Insira uma resposta');
+                    return;
+                }
+                console.log(id);
+                console.log(descricao);
+                $.ajax({
+                    url: '/enviar-respost-report',
+                    type: 'post',
+                    data: {
+                        id,
+                        descricao
+                    },
+                    success: function (data) {
+                        alert('Resposta enviada com sucesso.');
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+
+
+
+
+
+
+</html>
