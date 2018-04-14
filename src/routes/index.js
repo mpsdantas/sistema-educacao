@@ -6,15 +6,12 @@ module.exports = application => {
     application.get('/report', blockRouter.statusUser, (req,res) => {
         res.render('report/form',{nome:req.session.nome});
     });
-
-    /*application.get('/report/visualizar', blockRouter.statusUser, (req,res) => {
-        res.render('report/visualizar',{nome:req.session.nome});
-    });*/
     
     application.get('/admin', blockRouter.statusAdmin, (req, res) => { 
 
         report.exibirDashboard(application, req, res);
     });
+
     application.get('/admin/statistics', blockRouter.statusAdmin,  (req,res) => {
         res.render('admin/stats')
     });
@@ -22,7 +19,7 @@ module.exports = application => {
     application.get('/admin/reports', blockRouter.statusAdmin, (req,res) => {res.render('admin/reports')});
 
     application.get('/perfil/user-perfil', blockRouter.statusUser, (req, res) => {
-        res.render('perfil/user-perfil', {nome:req.session.nome})
+        res.render('perfil/user-perfil', {nome:req.session.nome, email:req.session.email, tipoDired:req.session.tipoDired, escola:req.session.escola})
     });
 
     application.get('/perfil/editar', blockRouter.statusUser, (req, res) => {

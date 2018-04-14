@@ -12,7 +12,8 @@ const reportSchema = new Schema({
     data: Date,
     statusReport: Boolean,
     dialogo:[{
-        msg: String
+        msg: String,
+        data:Date
     }]
 });
 
