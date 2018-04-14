@@ -7,8 +7,7 @@ module.exports = application => {
       res.render('report/form',{nome:req.session.nome});
   });
 
-  application.get('/admin', blockRouter.statusAdmin, (req, res) => { 
-
+  application.get('/admin', blockRouter.statusAdmin, (req, res) => {
       report.exibirDashboard(application, req, res);
   });
 
@@ -32,7 +31,7 @@ module.exports = application => {
       res.render('perfil/user-perfil', {nome:req.session.nome, email:req.session.email, tipoDired:req.session.tipoDired, escola:req.session.escola})
   });
   application.get("/admin/reports", blockRouter.statusAdmin, (req, res) => {
-    res.render("admin/reports");
+      report.exibirTodosReports(application, req, res);
   });
 
 

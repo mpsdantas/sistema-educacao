@@ -46,6 +46,10 @@ exports.exibirDashboard = async (application, req, res) =>{
     const reportsReclamacoes = await Report.find({ assunto:"reclamação"});
     res.render('admin/dashboard', { reportsAbertos, reportsTotal, reportsReclamacoes, reportsFechados, reportsEsseMes});
 }
+exports.exibirTodosReports = async (application, req, res) => {
+    const reportsTotal = await Report.find({});
+    res.render('admin/reports', {reports: reportsTotal});
+}
 exports.respostaReportIndividual = async (application, req, res) => {
     console.log(req.body.id);
     console.log(req.body.descricao);
