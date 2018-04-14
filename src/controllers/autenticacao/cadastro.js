@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const Usuario = mongoose.model('Usuarios');
 const Servidor = mongoose.model('Servidores');
+const Escola = mongoose.model('Escolas');
 const crypto = require('crypto');
+exports.exibirCadastro = async (application, req, res) =>{
+    const todasEscolas = await Escola.find({});
+    res.render('autenticacao/cadastro-usuario',{escolas:todasEscolas});
+}
 exports.realizarCadastroUsuario = async (application, req, res) => {
     req.assert('nome', 'O seu nome não pode ser vazio').notEmpty();
     req.assert('email', 'O seu e-mail não pode ser vazio.').notEmpty();

@@ -48,7 +48,15 @@
 						</div>
 						<div class="form-group">
                             <label for="escola">Escola:</label>
-                            <input type="text" class="form-control" id="escola" placeholder="Insira o nome da sua escola.">
+                            <select name="escola" class="form-control" id="selectTipoDired">
+								<option value="nenhuma">Nenhuma</option>
+								<%if(escolas.length>0){%>
+									<%for(let i =0; i<escolas.length; i++){%>
+										<option value="<%=escolas[i].nome%>"><%=escolas[i].nome%></option>
+									<%}%>
+								<%}%>
+								
+							</select>
                         </div>
 						<div class="form-group">
 							<label for="selectTipoDired">Dired que pertence a sua escola:</label>
@@ -101,7 +109,7 @@
 				let email = $('#email').val();
 				let tipoUsuario = $('select[name=tipoUsuario]').val();
 				let tipoDired = $('select[name=tipoDired]').val();
-				let escola = $('#escola').val();
+				let escola = $('select[name=escola]').val();
 				let senha = $('#senha').val();
 				let repetirSenha = $('#repetir-senha').val();
 				let arrayErrors = new Array(6);
@@ -217,5 +225,6 @@
 			});
 		});
 	</script>
+	
 </body>
 </html>

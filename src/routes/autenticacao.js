@@ -2,7 +2,8 @@ const autenticacao = require('../controllers/autenticacao/cadastro');
 const blockRouter = require('../controllers/blockRouter');
 module.exports = application => {
     application.get('/cadastro-usuario', (req, res) => { 
-        res.render('autenticacao/cadastro-usuario')
+        //res.render('autenticacao/cadastro-usuario')
+        autenticacao.exibirCadastro(application, req, res);
     });
     application.post('/cadastro-usuario', (req, res) => {
         autenticacao.realizarCadastroUsuario(application, req, res);
