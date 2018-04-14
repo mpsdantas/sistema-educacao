@@ -42,15 +42,15 @@
 					<hr>
 					<h5>Repostas: (<%=reportIndividual.dialogo.length-1%>)</h5>
 					<%for(let i=reportIndividual.dialogo.length-1; i>=1;i--){%>
-						<div class="card">
+						<div class="card <%=reportIndividual.dialogo[i].enviadoPor==reportIndividual.nome?'bg-light':'bg-green'%>">
 							<div class="card-body">
 								<p class="card-text">
 									<b>Resposta:</b> <%=reportIndividual.dialogo[i].msg%></p>
-								<p class="pull-right text-muted small">Enviado por 
-								<%=reportIndividual.dialogo[i].enviadoPor%> em  
+								<p class="pull-right text-muted small">Enviado por
+								<%=reportIndividual.dialogo[i].enviadoPor%> em
 								<%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%>
 								</p>
-								
+
 							</div>
 						</div>
 						<br>

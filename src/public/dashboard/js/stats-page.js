@@ -6,10 +6,10 @@ function drawBasic() {
 
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Mês');
-    data.addColumn('number', 'Número de arquivos');
+    data.addColumn('number', 'Número total de reports');
 
     data.addRows(
-      [["Janeiro", 36],["Fevereiro", 40],["Março", 13],["Abril", 104],["Junho", 75],["Julho", 65],["Agosto", 50],["Setembro", 3],["Outubro", 109],["Novembro", 29],["Dezembro", 13]]);
+      [["Jan", 36],["Fev", 40],["Mar", 13],["Abr", 104],["Jun", 75],["Jul", 65],["Ago", 50],["Set", 3],["Out", 109],["Nov", 29],["Dez", 13]]);
 
     var options = {
       title: 'Distribuição de Reports por mês',
