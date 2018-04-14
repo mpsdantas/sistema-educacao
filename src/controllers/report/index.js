@@ -33,6 +33,10 @@ exports.exibirReportIndividual = async (application, req, res) =>{
     const reportIndividual = await Report.findOne({_id:new ObjectId(req.params.id)});
     res.render('report/visualizar',{reportIndividual});
 }
+exports.exibirReportIndividualAdmin = async (application, req, res) => {
+    const reportIndividual = await Report.findOne({ _id: new ObjectId(req.params.id) });
+    res.render('admin/report-individual', { reportIndividual });
+}
 exports.exibirDashboard = async (application, req, res) =>{
     let d = new Date();
     let anoC = d.getFullYear();
@@ -51,8 +55,6 @@ exports.exibirTodosReports = async (application, req, res) => {
     res.render('admin/reports', {reports: reportsTotal});
 }
 exports.respostaReportIndividual = async (application, req, res) => {
-    console.log(req.body.id);
-    console.log(req.body.descricao);
     const updateRespostass = await Report.update({_id: new ObjectId(req.body.id) },
     { $push: { dialogo: {msg:req.body.descricao,data: new Date(),enviadoPor:req.session.nome}}});
     res.status(200).json({status:true});

@@ -65,7 +65,7 @@
                                             <tbody>
                                                 <%for (let i=0; i<reports.length; i++){%>
                                                 <tr>
-                                                    <td><a href="/ver-reports/<%=reports[i]._id%>"><%=reports[i].assunto%></td>
+                                                    <td><a href="/ver-reports-admin/<%=reports[i]._id%>"><%=reports[i].assunto%></td>
                                                     <td><%=reports[i].data.toLocaleDateString('pt-BR')%></td>
                                                     <td><%=reports[i].titulo%></td>
                                                     <td><%=(reports[i].dialogo.length>1)?'Sim':'Não'%></td>
