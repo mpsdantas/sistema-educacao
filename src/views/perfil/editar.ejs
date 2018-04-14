@@ -19,7 +19,7 @@
 <link href="/css/estilo.css" rel="stylesheet">
 </head>
 <body>
-	<% include ../components/navbar-principal %>
+	<% include ../components/usuario/navbar-user %>
 	<br>
 	<br>
 	<section class="conteudo-principal">
@@ -32,11 +32,7 @@
                             <label for="nome">Nome:</label>
                             <input type="text" class="form-control" id="nome" placeholder="Insira seu email aqui.">
                         </div>
-                        <div class="form-group">
-                            <label for="email">E-mail:</label>
-                            <input type="email" class="form-control" id="email" placeholder="Insira o seu e-mail aqui.">
-                        </div>
-						<div class="form-group">
+                       	<div class="form-group">
 							<label for="selectTipoUsuario">Eu sou um:</label>
 							<select name="tipoUsuario" class="form-control" id="selectTipoUsuario">
 								<option value="Aluno">Aluno(a)</option>
@@ -69,14 +65,6 @@
 								<option value="João Câmara">João Câmara</option>
 							</select>
 						</div>
-						<div class="form-group">
-                            <label for="senha">Senha:</label>
-                            <input type="password" class="form-control" id="senha" placeholder="Insira sua senha aqui.">
-                        </div>
-						<div class="form-group">
-                            <label for="repetir-senha">Repetir senha:</label>
-                            <input type="password" class="form-control" id="repetir-senha" placeholder="Repita sua senha Insira sua senha aqui.">
-                        </div>
 						<button type="submit" class="btn btn-block btn-success">Atualizar dados</button>
                     </form>
 					<br><br>
