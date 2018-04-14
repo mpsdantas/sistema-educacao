@@ -28,4 +28,8 @@ module.exports = application => {
     application.get('/perfil/editar', blockRouter.statusUser, (req, res) => {
         res.render('perfil/editar', {nome:req.session.nome})
     })
+
+    application.get('/perfil/alterar-senha', blockRouter.statusUser, (req, res) => {
+        res.render('perfil/alterar-senha', {nome:req.session.nome})
+    })
 };
