@@ -31,6 +31,7 @@ exports.exibirReportsUsuario = async (application, req, res) => {
 }
 exports.exibirReportIndividual = async (application, req, res) =>{
     const reportIndividual = await Report.findOne({_id:new ObjectId(req.params.id)});
+    res.render('report/visualizar',{reportIndividual});
 }
 exports.exibirDashboard = async (application, req, res) =>{
     let d = new Date();
@@ -44,4 +45,11 @@ exports.exibirDashboard = async (application, req, res) =>{
     const reportsTotal = await Report.find({});
     const reportsReclamacoes = await Report.find({ assunto:"reclamação"});
     res.render('admin/dashboard', { reportsAbertos, reportsTotal, reportsReclamacoes, reportsFechados, reportsEsseMes});
+}
+exports.respostaReportIndividual = async (application, req, res) => {
+    console.log(req.body.id);
+    console.log(req.body.descricao);
+    const updateRespostass = await Report.update({_id: new ObjectId(req.body.id) },
+    { $push: { dialogo: {msg:req.body.descricao,data: new Date()}}});
+    res.status(200).json({status:true});
 }

@@ -59,6 +59,7 @@ exports.realizarLogin = async (application, req, res) => {
     }else if(buscaUsuarios !== null){
         req.session.statusUser = true;
         req.session.nome = buscaUsuarios.nome;
+        req.session.email = buscaUsuarios.email;
         req.session.tipoUsuario = buscaUsuarios.tipoUsuario;
         req.session.tipoDired = buscaUsuarios.tipoDired;
         req.session.escola = buscaUsuarios.escola;

@@ -34,20 +34,24 @@
 						</div>
 						<div class="card-body">
 							<h5 class="card-title">
-								<b>Título:</b> Professor não me atende.</h5>
+								<b>Título:</b> <%=reportIndividual.titulo%></h5>
 							<p class="card-text">
-								<b>Descrição:</b> Depois de muita procura, meu professor continua me ingnorando. Estou muito chateado! Brabo mesmo.</p>
+								<b>Descrição:</b><%=reportIndividual.descricao%></p>
 						</div>
 					</div>
 					<hr>
-					<h5>Repostas: (1)</h5>
-					<div class="card">
-						<div class="card-body">
-							<p class="card-text">
-								<b>Resposta:</b> Olá, João. Já identificamos o problema, estamos tomando providências para resolve-lo.</p>
-							<p class="pull-right text-muted small">Enviado em 12 de Fevereiro de 2018.</p>
+					<h5>Repostas: (<%=reportIndividual.dialogo.length-1%>)</h5>
+					<%for(let i=reportIndividual.dialogo.length-1; i>=1;i--){%>
+						<div class="card">
+							<div class="card-body">
+								<p class="card-text">
+									<b>Resposta:</b> <%=reportIndividual.dialogo[i].msg%></p>
+								<p class="pull-right text-muted small">Enviado em <%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%></p>
+								
+							</div>
 						</div>
-					</div>
+						<br>
+					<%}%>
 					<br>
 					<hr>
 					<form id="form-login">
@@ -74,20 +78,22 @@
 				$(document).ready(function () {
 					$('#form-login').submit(function (event) {
 						event.preventDefault();
-						var usuario = $('#usuario').val();
-						var escola = $('#escola').val();
-						var assunto = $('#assunto').val();
-						var titulo = $('#titulo').val();
-						var descricao = $('#descricao').val();
+						let descricao = $('#descricao').val();
+						let id = `<%=reportIndividual._id%>`;
+						if(descricao==""){
+							alert('Insira uma resposta');
+							return;
+						}
 						$.ajax({
-							url: '/realizar-report',
+							url: '/enviar-respost-report',
 							type: 'post',
 							data: {
-								email,
-								senha
+								id,
+								descricao
 							},
 							success: function (data) {
-								alert('enviado');
+								alert('Resposta enviada com sucesso.');
+								location.reload();
 							}
 						});
 					});
