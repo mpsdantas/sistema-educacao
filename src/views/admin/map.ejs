@@ -119,11 +119,22 @@
 
         var chart = [];
 
-        $.getJSON( "/js/geojson/rn.json", function( geojson ) {
+        var data = [
+            ['240010', 728],
+            ['240050', 2]
+        ];
 
-            var data = [
-              ['240010', 728],
-            ];
+        var dataR = [
+            ['240080', 500],
+            ['240240', 5]
+        ];
+
+        var dataS = [
+            ['240890', 600],
+            ['240610', 6]
+        ]
+
+        $.getJSON( "/js/geojson/rn.json", function( geojson ) {
 
             var max = 1;
             for(i = 0; i < data.length; ++i){
@@ -184,23 +195,37 @@
             }
         });
     
-        var i = 1;
-        var titles = ['Escolas', 'Reclamações'];
-        var colors = ['#001FA1', '#D43A15']
-        $('#mapa_select').change( function(){
+        
+        var titles = ['Escolas', 'Reports'];
+        var colors = [['#E6EBF5','#001FA1' ], ['#45D448', '#D43A15']];
+        var index = 1;
+        $('#mapa_select').change(function(e){
+            console.log('change');
+            console.log(titles[index]);
+
+            if($(this).val() === 'reclamacoes'){
+                var shallowDataR = dataR.slice(0, dataR.length);
+                var shallowDataS = dataS.slice(0, dataS.length);
+                var s = chart.series[0].setData(shallowDataR);
+                //var s = chart.series[1].setData(shallowDataS);
+                console.log(shallowDataR)
+                console.log(dataR)
+            } else {
+                var s = chart.series[0].setData(data);
+                console.log(data)
+            }
+
             chart.update({
                 title: {
-                    text: titles[i]
-                },
-                colorAxis: {
-                    maxColor: colors[i]
-                },
-                series: [{
-                    name: titles[i],
-                }]
+                    text: titles[index]
+                }, 
+                series: {
+                    data: s
+                }
             });
+            
 
-            i = 1 - i;
+            index = 1 - index;
         });
     
     </script>
