@@ -10,20 +10,25 @@ body {
 #wrapper {
   width: 100%;
 }
+#page-wrapper {
+  padding: 0 15px 0 15px;
+  min-height: 568px;
+  background-color: white;
+}
 @media (max-width: 767px) {
-    #page-wrapper {
-        padding: 0 15px 0 15px;
-        min-height: 568px;
-        background-color: white;
-    }
+  #page-wrapper {
+    padding: 0 15px 0 15px;
+    min-height: 568px;
+    background-color: white;
+  }
 
-    .brand-admin {
-        padding: 15px 0 15px 15px;
-    }
+  .brand-admin {
+    padding: 15px 0 15px 15px;
+  }
 
-    .brand-admin .mobile {
-        visibility: hidden;
-    }
+  .brand-admin .mobile {
+    visibility: hidden;
+  }
 }
 
 @media (min-width: 768px) {
@@ -35,12 +40,9 @@ body {
   }
 
   .brand-admin {
-      padding:15px 0 15px 20%;
+    padding: 15px 0 15px 20%;
   }
 }
-
-
-
 
 .navbar-top-links {
   margin-right: 0;
@@ -135,7 +137,7 @@ body {
 .btn-outline {
   color: inherit;
   background-color: transparent;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 .btn-primary.btn-outline {
   color: #428bca;

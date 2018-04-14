@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Report = mongoose.model('Reports');
+const Usuario = mongoose.model('Usuarios');
 const ObjectId = require('mongodb').ObjectID;
+const nodemailer = require('nodemailer');
 exports.realizarReport = async (application, req, res) => {
     if(req.body.anonimo==='false'){
         req.body.nome = req.session.nome;
@@ -58,4 +60,22 @@ exports.respostaReportIndividual = async (application, req, res) => {
     const updateRespostass = await Report.update({_id: new ObjectId(req.body.id) },
     { $push: { dialogo: {msg:req.body.descricao,data: new Date(),enviadoPor:req.session.nome}}});
     res.status(200).json({status:true});
+    const { nome } = await Report.findOne({ _id: new ObjectId(req.body.id)});
+    const {email} = await Usuario.findOne({nome:nome});
+    const transporte = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'aplicacaobapp@gmail.com',
+            pass: 'bapp2017Natal@123'
+        }
+    });
+    const enviarEmail = {
+        from: 'naoresponder@bapp.com',
+        to: email, // Quem receberá
+        subject: 'Resposta da secretaria de educação',  // Um assunto bacana :-) 
+        html: "A secretaria de educação respondeu a sua questão, entre no sistema agora e confira." // O conteúdo do e-mail
+    };
+    transporte.sendMail(enviarEmail, function (err, info) {
+        if (err) throw err;
+    });
 }

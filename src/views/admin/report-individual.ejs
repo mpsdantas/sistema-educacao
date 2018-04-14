@@ -32,58 +32,65 @@
 
     <div id="wrapper">
 
-    	<% include ../components/admin/navbar-admin %>
+        <% include ../components/admin/navbar-admin %>
 
-        <div id="page-wrapper">
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="row">
-                        <h4>Detalhes sobre o Report</h4>
-                        <br>
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <b>Título:</b> <%=reportIndividual.titulo%></h5>
-                                <p class="card-text">
-                                    <b>Descrição:</b><%=reportIndividual.descricao%></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <h5>Repostas: (<%=reportIndividual.dialogo.length-1%>)</h5>
-                        <%for(let i=reportIndividual.dialogo.length-1; i>=1;i--){%>
-                            <div class="card">
-                                <div class="card-body">
+            <div id="page-wrapper">
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="row">
+                            <h4>Detalhes sobre o Report</h4>
+                            <br>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Report Principal</div>
+                                <div class="panel-body">
+                                    <h5>
+                                        <b>Título:</b>
+                                        <%=reportIndividual.titulo%>
+                                    </h5>
                                     <p class="card-text">
-                                        <b>Resposta:</b> <%=reportIndividual.dialogo[i].msg%></p>
-                                    <p class="pull-right text-muted small">Enviado por 
-                                    <%=reportIndividual.dialogo[i].enviadoPor%> em  
-                                    <%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%>
+                                        <b>Descrição:</b>
+                                        <%=reportIndividual.descricao%>
                                     </p>
-                                    
                                 </div>
                             </div>
-                            <br>
-                        <%}%>
-                        <br>
-                        <hr>
-                        <form id="form-login">
-                            <div class="form-group">
-                                <label for="descricao">
-                                    <h5>Responder ao Report:</h5>
-                                </label>
-                                <textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
-                            </div>
-                            <button id="botaoLogin" type="submit" class="btn btn-success">Enviar</button>
                             <hr>
-                        </form>
+                            <h3>Repostas: (
+                                <%=reportIndividual.dialogo.length-1%>)</h5>
+                                    <%for(let i=1; i < reportIndividual.dialogo.length; i++){%>
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <p>
+                                                    <b>Resposta:</b>
+                                                    <%=reportIndividual.dialogo[i].msg%>
+                                                </p>
+                                                <p class="pull-right text-muted small">Enviado por
+                                                    <%=reportIndividual.dialogo[i].enviadoPor%> em
+                                                        <%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                            <br>
+                                            <hr>
+                                            <form id="form-login">
+                                                <div class="form-group">
+                                                    <label for="descricao">
+                                                        <h5>Responder ao Report:</h5>
+                                                    </label>
+                                                    <textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
+                                                </div>
+                                                <button id="botaoLogin" type="submit" class="btn btn-success">Enviar</button>
+                                            </form>
+                                            <br>
+                        </div>
                     </div>
+                    <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
+            <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
@@ -110,7 +117,7 @@
                 event.preventDefault();
                 let descricao = $('#descricao').val();
                 let id = `<%=reportIndividual._id%>`;
-                if(descricao==""){
+                if (descricao == "") {
                     alert('Insira uma resposta');
                     return;
                 }

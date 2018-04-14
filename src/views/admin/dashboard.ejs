@@ -31,215 +31,235 @@
 
 <body>
     <% include ../components/admin/navbar-admin %>
-    <div id="wrapper">
-        <div id="page-wrapper">
+        <div id="wrapper">
+            <div id="page-wrapper">
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-envelope fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><%=reportsAbertos.length%></div>
-                                    <div>Reports Abertos!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver detalhes</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Dashboard</h1>
                     </div>
+                    <!-- /.col-lg-12 -->
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><%=reportsFechados.length%></div>
-                                    <div>Reports Respondidos!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver detalhes</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-calendar fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><%=reportsEsseMes.length%></div>
-                                    <div>Total nesse mês!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver detalhes</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-warning fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><%=reportsReclamacoes.length%></div>
-                                    <div>Total Reclamações!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Ver detalhes</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Últimas Notificações
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nome</th>
-                                                    <th>Data de Cadastro</th>
-                                                    <th>Escola</th>
-                                                    <th>Respondido?</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%for(let i =0; i<reportsTotal.length;i++){%>
-                                                    <tr>
-                                                        <td><%=reportsTotal[i].nome%></td>
-                                                        <td>13/04/2018</td>
-                                                        <td><%=reportsTotal[i].escola%></td>
-                                                        <td>
-                                                        <%if(reportsTotal[i].dialogo.length==1){%>
-                                                            Não
-                                                        <%}else{%>
-                                                            Sim
-                                                        <%}%>
-                                                        </td>
-                                        		    </tr>
-                                                <%}%>
-                                            </tbody>
-                                        </table>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-envelope fa-5x"></i>
                                     </div>
-                                    <!-- /.table-responsive -->
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <%=reportsAbertos.length%>
+                                        </div>
+                                        <div>Reports Abertos!</div>
+                                    </div>
                                 </div>
-                                <!-- /.col-lg-4 (nested) -->
-                                <div class="col-lg-8">
-                                    <div id="morris-bar-chart"></div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver detalhes</span>
+                                    <span class="pull-right">
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </span>
+                                    <div class="clearfix"></div>
                                 </div>
-                                <!-- /.col-lg-8 (nested) -->
-                            </div>
-                            <!-- /.row -->
+                            </a>
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-check fa-fw"></i> Próximas Ações
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> Ver todos os Reports
-                                    <span class="pull-right text-muted small">
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-calendar fa-fw"></i> Reports por mês
-                                    <span class="pull-right text-muted small">
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Mensagens enviadas
-                                    <span class="pull-right text-muted small">
-                                    </span>
-                                </a>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-check fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <%=reportsFechados.length%>
+                                        </div>
+                                        <div>Reports Respondidos!</div>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">Ver todas</a>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver detalhes</span>
+                                    <span class="pull-right">
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-calendar fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <%=reportsEsseMes.length%>
+                                        </div>
+                                        <div>Total nesse mês!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver detalhes</span>
+                                    <span class="pull-right">
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-warning fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <%=reportsReclamacoes.length%>
+                                        </div>
+                                        <div>Total Reclamações!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver detalhes</span>
+                                    <span class="pull-right">
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col-lg-4 -->
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bell fa-fw"></i> Últimas Notificações
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nome</th>
+                                                        <th>Data de Cadastro</th>
+                                                        <th>Escola</th>
+                                                        <th>Respondido?</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%for(let i =0; i<reportsTotal.length;i++){%>
+                                                        <tr>
+                                                            <td>
+                                                                <%=reportsTotal[i].nome%>
+                                                            </td>
+                                                            <td>13/04/2018</td>
+                                                            <td>
+                                                                <%=reportsTotal[i].escola%>
+                                                            </td>
+                                                            <td>
+                                                                <%if(reportsTotal[i].dialogo.length==1){%>
+                                                                    Não
+                                                                    <%}else{%>
+                                                                        Sim
+                                                                        <%}%>
+                                                            </td>
+                                                        </tr>
+                                                        <%}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.table-responsive -->
+                                    </div>
+                                    <!-- /.col-lg-4 (nested) -->
+                                    <div class="col-lg-8">
+                                        <div id="morris-bar-chart"></div>
+                                    </div>
+                                    <!-- /.col-lg-8 (nested) -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-8 -->
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-check fa-fw"></i> Próximas Ações
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="/admin/reports" class="list-group-item">
+                                        <i class="fa fa-comment fa-fw"></i> Ver todos os Reports
+                                        <span class="pull-right text-muted small">
+                                        </span>
+                                    </a>
+                                    <a href="/admin/statistics" class="list-group-item">
+                                        <i class="fa fa-calendar fa-fw"></i> Reports por mês
+                                        <span class="pull-right text-muted small">
+                                        </span>
+                                    </a>
+                                    <a href="/admin/reports" class="list-group-item">
+                                        <i class="fa fa-envelope fa-fw"></i> Mensagens enviadas
+                                        <span class="pull-right text-muted small">
+                                        </span>
+                                    </a>
+                                </div>
+                                <!-- /.list-group -->
+                                <a href="#" class="btn btn-default btn-block">Ver todas</a>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-4 -->
+                </div>
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
+            <!-- /#page-wrapper -->
+
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+        <!-- jQuery -->
+        <script src="/dashboard/vendor/jquery/jquery.min.js"></script>
 
-    <!-- jQuery -->
-    <script src="/dashboard/vendor/jquery/jquery.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/dashboard/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="/dashboard/vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/dashboard/vendor/metisMenu/metisMenu.min.js"></script>
+        <!-- Morris Charts JavaScript -->
+        <script src="/dashboard/vendor/raphael/raphael.min.js"></script>
+        <script src="/dashboard/vendor/morrisjs/morris.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="/dashboard/vendor/raphael/raphael.min.js"></script>
-    <script src="/dashboard/vendor/morrisjs/morris.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/dashboard/dist/js/sb-admin-2.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="/dashboard/dist/js/sb-admin-2.js"></script>
 
 </body>
 
