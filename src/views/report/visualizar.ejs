@@ -46,7 +46,10 @@
 							<div class="card-body">
 								<p class="card-text">
 									<b>Resposta:</b> <%=reportIndividual.dialogo[i].msg%></p>
-								<p class="pull-right text-muted small">Enviado em <%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%></p>
+								<p class="pull-right text-muted small">Enviado por 
+								<%=reportIndividual.dialogo[i].enviadoPor%> em  
+								<%=reportIndividual.dialogo[i].data.toLocaleDateString('pt-BR')%>
+								</p>
 								
 							</div>
 						</div>

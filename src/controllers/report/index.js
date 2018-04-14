@@ -50,6 +50,6 @@ exports.respostaReportIndividual = async (application, req, res) => {
     console.log(req.body.id);
     console.log(req.body.descricao);
     const updateRespostass = await Report.update({_id: new ObjectId(req.body.id) },
-    { $push: { dialogo: {msg:req.body.descricao,data: new Date()}}});
+    { $push: { dialogo: {msg:req.body.descricao,data: new Date(),enviadoPor:req.session.nome}}});
     res.status(200).json({status:true});
 }

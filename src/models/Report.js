@@ -13,7 +13,8 @@ const reportSchema = new Schema({
     statusReport: Boolean,
     dialogo:[{
         msg: String,
-        data:Date
+        data:Date,
+        enviadoPor:String
     }]
 });
 
