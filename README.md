@@ -1,6 +1,6 @@
-# sistema-educacao
+# Sistema de reports Educacional.
 
-### Projeto desenvolvido para a Hackathon RN Digital na Campus Party Natal 2018.
+### Projeto campeão desenvolvido para a Hackathon RN Digital na Campus Party Natal 2018.
 
 ## Objetivo
 O objetivo é desenvolver uma aplicação que possibilite a comunicação entre alunos, professores, responsáveis, direção da escola e Secretária da Educação do Rio Grande do Norte(SEEC/RN) por meio de uma aplicação mobile e web. Por meio da aplicação será possível comunicar a SEEC sobre sugestões e reclamações a respeito das escolas pelo estado. A partir da plataforma, a SEEC terá acesso a informações sobre todas as escolas do estado, gerando assim estatísticas que poderão ser utilizadas para tomar decisões.
