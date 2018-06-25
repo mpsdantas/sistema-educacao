@@ -7,20 +7,22 @@ google.charts.setOnLoadCallback(drawAxisTickColors);
 function drawBasic() {
   var data = new google.visualization.DataTable();
   data.addColumn("string", "Mês");
-  data.addColumn("number", "Número total de reports");
+  data.addColumn("number", "Sugestões");
+  data.addColumn("number", "Reclamações");
+  data.addColumn("number", "Outros");
 
   data.addRows([
-    ["Jan", 36],
-    ["Fev", 40],
-    ["Mar", 13],
-    ["Abr", 104],
-    ["Jun", 75],
-    ["Jul", 65],
-    ["Ago", 50],
-    ["Set", 3],
-    ["Out", 109],
-    ["Nov", 29],
-    ["Dez", 13]
+    ["Jan", 36, 21, 32],
+    ["Fev", 40, 23, 12],
+    ["Mar", 13, 31, 23],
+    ["Abr", 59, 12, 12],
+    ["Jun", 75, 32, 23],
+    ["Jul", 65, 21, 12],
+    ["Ago", 50, 31, 11],
+    ["Set", 87, 13, 43],
+    ["Out", 65, 11, 21],
+    ["Nov", 29, 32, 21],
+    ["Dez", 13, 32, 31]
   ]);
 
   var options = {
@@ -29,13 +31,14 @@ function drawBasic() {
       title: "Mês"
     },
     vAxis: {
-      title: "Quantidade de Reports"
+      title: "Quantidade de Reports",
+      gridlines: { count: 4 }
     },
-    colors: ["blue", "#004411"],
+    lineWidth: 2.5,
     height: 400
   };
 
-  var chart = new google.visualization.ColumnChart(
+  var chart = new google.visualization.LineChart(
     document.getElementById("grafico-barra")
   );
 
@@ -165,6 +168,26 @@ function drawAxisTickColors() {
 
   var chart = new google.visualization.ColumnChart(
     document.getElementById("grafico-escolas")
+  );
+  chart.draw(data, options);
+}
+function drawDonut() {
+  var data = google.visualization.arrayToDataTable([
+    ["Task", "Hours per Day"],
+    ["Work", 11],
+    ["Eat", 2],
+    ["Commute", 2],
+    ["Watch TV", 2],
+    ["Sleep", 7]
+  ]);
+
+  var options = {
+    title: "My Daily Activities",
+    pieHole: 0.4
+  };
+
+  var chart = new google.visualization.PieChart(
+    document.getElementById("donutchart")
   );
   chart.draw(data, options);
 }

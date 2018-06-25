@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Report - Sistema de envio de informações Dired</title>
 	<meta charset="utf-8">
@@ -14,21 +15,25 @@
 	<!--
 	<link rel="icon" href="imagens/favicon.png">
 -->
-<!-- Bootstrap -->
-<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/css/estilo.css" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/estilo.css" rel="stylesheet">
 </head>
+
 <body>
 	<% include ../components/usuario/navbar-user %>
-	<br>
-	<section class="conteudo-principal">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 offset-md-2 col-10 offset-1">
-					<div id="erros" ></div>
-					<form id="form-login">
-						<p>Bem vindo <%=nome%>, <br><br>Abaixo você pode comunicar algum problema ou reclamação para a SIEC.</p>
-						<!--
+		<br>
+		<section class="conteudo-principal">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-10 offset-1">
+						<div id="erros"></div>
+						<form id="form-login">
+							<p>Bem vindo
+								<%=nome%>,
+									<br>
+									<br>Abaixo você pode comunicar algum problema ou reclamação para a SEEC.</p>
+							<!--
 						<div class="form-group">
 							<label for="usuario">Usuário</label>
 							<input type="text" class="form-control" id="usuario" placeholder="Nome do seu usuario">
@@ -38,105 +43,105 @@
 							<input required type="text" class="form-control" id="usuario" placeholder="Nome da sua escola">
 						</div>
 						<hr>-->
-						<div class="form-group">
-							<label for="selectAssunto">Assunto*</label>
-							<select name="assunto" class="form-control" id="selectAssunto">
-								<option value="sugestão">Sugestão de melhoria</option>
-								<option value="reclamação">Reclamação</option>
-								<option value="outros">Outro</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="titulo">Título*</label>
-							<input required type="text" class="form-control" id="titulo" placeholder="Digite o Título da mensagem">
-						</div>
-						<div class="form-group">
-							<label for="descricao">Descrição*</label>
-							<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="true" id="checkAnonimo">
-							<label class="form-check-label" for="defaultCheck1">
-								Enviar anonimamente
-							</label>
-						</div>
+							<div class="form-group">
+								<label for="selectAssunto">Assunto*</label>
+								<select name="assunto" class="form-control" id="selectAssunto">
+									<option value="sugestão">Sugestão de melhoria</option>
+									<option value="reclamação">Reclamação</option>
+									<option value="outros">Outro</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="titulo">Título*</label>
+								<input required type="text" class="form-control" id="titulo" placeholder="Digite o Título da mensagem">
+							</div>
+							<div class="form-group">
+								<label for="descricao">Descrição*</label>
+								<textarea required id="descricao" class="form-control" rows="4" cols="50"></textarea>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="true" id="checkAnonimo">
+								<label class="form-check-label" for="defaultCheck1">
+									Enviar anonimamente
+								</label>
+							</div>
+							<br>
+							<button id="botaoLogin" type="submit" class="btn btn-success btn-block">Enviar</button>
+							<hr>
+						</form>
 						<br>
-						<button id="botaoLogin" type="submit" class="btn btn-success btn-block">Enviar</button>
-						<hr>
-					</form>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+						<br>
+						<br>
+						<br>
+						<br>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-	<% include ../components/footer %>
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="/bootstrap/js/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#form-login').submit(function(event) {
-				event.preventDefault();
-				let assunto = $('select[name=assunto]').val();
-				let descricao = $('#descricao').val();
-				let titulo = $('#titulo').val();
-				let anonimo = $("#checkAnonimo").is( ":checked" )
-				var dados = {
-					assunto,
-					descricao,
-					anonimo,
-					titulo
-				}
-				//console.log(dados);
-				
-				$.ajax({
-                    url:'/realizar-report',
-                    type:'post',
-                    data : {
-                        assunto,
-						descricao,
-						anonimo,
-						titulo
-                    },
-                    success : function(data, status, xhr){
-						console.log(data);
-                        if(xhr.status==203){
-							var msg = "";
-							for(let i =0; i<data.erros.length; i++){
-								msg += data.erros[i].msg + '<br>';
-							}
-							let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
+		</section>
+		<% include ../components/footer %>
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+			<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			 crossorigin="anonymous"></script>
+			<!-- Include all compiled plugins (below), or include individual files as needed -->
+			<script src="/bootstrap/js/bootstrap.min.js"></script>
+			<script>
+				$(document).ready(function () {
+					$('#form-login').submit(function (event) {
+						event.preventDefault();
+						let assunto = $('select[name=assunto]').val();
+						let descricao = $('#descricao').val();
+						let titulo = $('#titulo').val();
+						let anonimo = $("#checkAnonimo").is(":checked")
+						var dados = {
+							assunto,
+							descricao,
+							anonimo,
+							titulo
+						}
+						//console.log(dados);
+
+						$.ajax({
+							url: '/realizar-report',
+							type: 'post',
+							data: {
+								assunto,
+								descricao,
+								anonimo,
+								titulo
+							},
+							success: function (data, status, xhr) {
+								console.log(data);
+								if (xhr.status == 203) {
+									var msg = "";
+									for (let i = 0; i < data.erros.length; i++) {
+										msg += data.erros[i].msg + '<br>';
+									}
+									let htmlAppend = `<div class="alert alert-danger alert-dismissible fade 					show" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 								${msg}
 							</div>`;
-							$('#erros').append(htmlAppend);
-						}
-						if(data.status){
-							let htmlAppend = `<div class="alert alert-success alert-dismissible fade 					show" role="alert">
+									$('#erros').append(htmlAppend);
+								}
+								if (data.status) {
+									let htmlAppend = `<div class="alert alert-success alert-dismissible fade 					show" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 								${data.msg}
 							</div>`;
-							$('select[name=assunto]').val('');
-							$('#descricao').val('');
-							$('#titulo').val('');
-							$("#checkAnonimo").val('false');
-							$('#erros').append(htmlAppend);
-						}
-                    }
-                });
-			});
-		});
-	</script>
+									$('select[name=assunto]').val('');
+									$('#descricao').val('');
+									$('#titulo').val('');
+									$("#checkAnonimo").val('false');
+									$('#erros').append(htmlAppend);
+								}
+							}
+						});
+					});
+				});
+			</script>
 </body>
+
 </html>
